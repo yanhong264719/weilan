@@ -1,0 +1,31 @@
+<div class="s_l fac_list_main" id="data">
+			<div class="fac_list_tab">
+				<ul id="fac_list_tab">
+					<li class="active"><a href="javascript:search_url(6, '1,1');">默认排序</a></li>
+					<li ><a href="javascript:search_url(6, '2,1');">发布时间</a></li>
+					<li ><a href="javascript:search_url(6, '3,1');">招聘人数</a></li>
+				</ul>
+				<span class="nums" id="aaa">共为您找到<em>{$info.total}</em>条信息</span>
+			</div>
+			<ul class="fac_list">
+				{volist name="$data" id="vo"}
+				<li class="first" >
+						<a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank" class="imgs"><img src="{$vo.thumb|geturl}" alt="{$vo.title}" class="imgs"></a>
+						<div class="cons">
+							<div class="names">
+								<span class="prices"><em>{$vo.wagas}</em></span>
+								<h4><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank">{$vo.title}</a></h4>
+							</div>
+							<p class="des">
+								<a href="{:url('index/index/map',['id'=>$vo.id])}" class="to_map"><i class="ic ic_fac_lmap"></i>电子地图</a>
+								<span class="titles">招聘人数：</span>{$vo.peoples}            <span class="titles title2">企业规模：</span>{$vo.scales}<br>
+								<span class="titles">招聘岗位：</span><span class="tp">长期工</span><span class="tp">小时工</span><br>
+								<span class="titles">招聘要求：</span>{$vo.sex}<i class="line"></i>{$vo.age}										
+							</p>
+							<p class="fac_tag"><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank" class="to_fac btn btn_blue btn_m btn_round">查看</a><em>不穿无尘服</em><em>年终奖</em><em>空调宿舍</em></p>
+						</div>
+					</li>
+               {/volist}
+				</ul>
+				{$data->render()}
+				</div>

@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{$keywords.name}</title>
+	<meta name="keywords" content="{$keywords.keywords}">
+	<meta name="description" content="{$keywords.desc}">
+	<meta name="author" content="">
+	<meta name="viewport" content=" initial-scale=1, maximum-scale=1">
+	<meta name="full-screen" content="true">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+	<link rel="stylesheet" href="__STATIC__/index/css/sm.css">
+	<link rel="stylesheet" href="__STATIC__/index/css/sm-extend.min.css">
+	<link rel="canonical" href=""/>
+	<link rel="stylesheet" href="__STATIC__/index/css/index.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/city/city/css/cityPicker.css">
+	<link rel="stylesheet" type="text/css" href="/static/public/layui/css/layui.css">	
+	 <style>
+		.page_ilink a{color:#333;}
+	</style>
+</head>
+<body>
+    <div class="page page_i" id="page_index" >
+
+		<header class="bar bar-nav bar_index">
+			
+			<a href="javascript:;" class="external pull-left bar_city" id="cityChoice"><i class="icon icon2 icon2-location_light"></i><span>切换城市</span></a>
+			<a href="/User/list_msg" class="external pull-right bar_msg active"><i class="icon icon2 icon2-message_light"></i>消息</a>
+			<div class="searchbar bar_search search_index">
+				<div class="search-input">
+					<label class="icon icon2 icon2-search_light" for="search"></label>
+					<input type="search" class="search" id="search" onchange="changes()" placeholder="输入城市名称进行搜索">
+				</div>
+			</div>
+			<input type="hidden" id="province" value="">
+            <input type="hidden" id="city" value="">
+		</header>
+		<nav class="bar bar-tab g_bar_tab" id="bar_tab">
+	<a class="external tab-item active" href="/">
+		<span class="icon icon2 ic icon2-shouyehui"></span><span class="icon icon2 ich icon2-shouye"></span>
+		<span class="tab-label">首页</span>
+	</a>
+	<a class="external tab-item " href="{:url('baoming')}">
+		<span class="icon icon2 ic icon2-yijianbaominghui"></span><span class="icon icon2 ich icon2-yijianbaoming"></span>
+		<span class="tab-label">一键报名</span>
+	</a>
+	<a class="tab-item external" href="/Gyq">
+	    <span class="icon icon2 ic icon2-gongyouquanhui"></span><span class="icon icon2 ich icon2-gongyouquan"></span>
+	    <span class="tab-label">工友圈</span>
+	  </a>
+	<a class="external tab-item " href="/News">
+		<span class="icon icon2 ic icon2-zixunhui"></span><span class="icon icon2 ich icon2-zixun"></span>
+		<span class="tab-label">资讯</span>
+	</a>
+	<a class="external tab-item " href="/User/index/type/2.html">
+		<span class="icon icon2 ic icon2-gerenzhongxinhui"></span><span class="icon icon2 ich icon2-gerenzhongxin"></span>
+		<span class="tab-label">个人中心</span>
+	</a>
+</nav>
+	<div class="content">
+		<div class="g_swiper">
+			<!-- Slider -->
+<div class="swiper-container" data-space-between='0' data-autoplay="3000">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide"><a class="external" href="http://www.gonglf.com/News/detail_n/1811.html"><img src="__STATIC__/index/picture/0b9c737a46b0f903a4a39676bf1df998.jpg" class="swiper-img" /></a></div><div class="swiper-slide"><a class="external" href="http://www.gonglf.com/News/detail_n/1813.html"><img src="__STATIC__/index/picture/85de1d851ef3cc11f1735df0ed541348.jpg" class="swiper-img" /></a></div><div class="swiper-slide"><a class="external" href="http://www.gonglf.com/News/detail_n/1815.html"><img src="__STATIC__/index/picture/37d070b40e90fa1eeb655dc31c6d94e2.jpg" class="swiper-img" /></a></div><div class="swiper-slide"><a class="external" href="http://www.gonglf.com/News/detail_n/1801"><img src="__STATIC__/index/picture/bb4ce3500fe620ca3523d8f0a4358d5d.jpg" class="swiper-img" /></a></div>	</div>
+	<div class="swiper-pagination"></div>
+</div>
+<script type="text/javascript">
+	var img_width =  document.body.clientWidth;
+	var img_height = parseInt(img_width)*0.35;
+	var img_objs = document.getElementsByClassName("swiper-img");
+	var i;
+	for (i = 0; i < img_objs.length; i++) {
+	    img_objs[i].style.width = img_width+"px";
+	    img_objs[i].style.height = img_height+"px";
+	}
+</script>
+		</div>
+		<ul class="page_itab row no-gutter">
+			<li class="col-50 first">
+				<a class="external" href="/Company">
+					<div class="img"><i class="icon2 icon2-zhaogangwei"></i></div>
+					<div class="con">
+						<h2>找岗位报名</h2>
+						<p>知名企业任你挑</p>
+					</div>
+				</a>
+			</li>
+			<li class="col-50">
+				<a class="external" href="/Store">
+					<div class="img"><i class="icon2 icon2-zhaomendian"></i></div>
+					<div class="con">
+						<h2>找门店服务</h2>
+						<p>服务就在家门口</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<ul class="page_ilink row no-gutter">
+			<li class="col-25"><a class="external" href="/Company/rezhao"><i class="ico"></i>最新招聘</a></li>
+			<li class="col-25"><a class="external" href="/Company/keyword/小时工.html"><i class="ico"></i>小时工专区</a></li>
+			<li class="col-25"><a class="external" href="/Public/oneRecom"><i class="ico"></i>推荐获大奖</a></li>
+			<li class="col-25"><a class="external" rel="nofollow" href="http://www.77hunlian.com/wap"><i class="ico"></i>找对象</a></li>
+		</ul>
+		<div class="page_imsg swiper-container" data-space-between='0' data-autoplay="2500" data-direction="vertical" data-loop="true">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">151****9049</span><span class="val">领推荐奖金500元</span></p><p><span class="ic_dot"></span><span class="phone">159****1385</span><span class="val">领推荐奖金1200元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">158****4709</span><span class="val">领推荐奖金1800元</span></p><p><span class="ic_dot"></span><span class="phone">153****4922</span><span class="val">领推荐奖金2000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">156****7899</span><span class="val">领推荐奖金1500元</span></p><p><span class="ic_dot"></span><span class="phone">130****2936</span><span class="val">领推荐奖金1000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">153****6286</span><span class="val">领推荐奖金1300元</span></p><p><span class="ic_dot"></span><span class="phone">131****0157</span><span class="val">领推荐奖金1000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">158****6068</span><span class="val">领推荐奖金1500元</span></p><p><span class="ic_dot"></span><span class="phone">155****1698</span><span class="val">领推荐奖金1000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">158****2550</span><span class="val">领推荐奖金1500元</span></p><p><span class="ic_dot"></span><span class="phone">153****2833</span><span class="val">领推荐奖金500元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">131****5121</span><span class="val">领推荐奖金1500元</span></p><p><span class="ic_dot"></span><span class="phone">156****2846</span><span class="val">领推荐奖金1200元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">151****2021</span><span class="val">领推荐奖金1800元</span></p><p><span class="ic_dot"></span><span class="phone">131****7882</span><span class="val">领推荐奖金1000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">135****1619</span><span class="val">领推荐奖金1500元</span></p><p><span class="ic_dot"></span><span class="phone">155****0268</span><span class="val">领推荐奖金3000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">130****0153</span><span class="val">领推荐奖金2000元</span></p><p><span class="ic_dot"></span><span class="phone">157****3341</span><span class="val">领推荐奖金1500元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">156****7255</span><span class="val">领推荐奖金1800元</span></p><p><span class="ic_dot"></span><span class="phone">150****6949</span><span class="val">领推荐奖金500元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">131****3640</span><span class="val">领推荐奖金1000元</span></p><p><span class="ic_dot"></span><span class="phone">151****5164</span><span class="val">领推荐奖金1200元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">139****7006</span><span class="val">领推荐奖金2000元</span></p><p><span class="ic_dot"></span><span class="phone">150****8026</span><span class="val">领推荐奖金500元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">152****7305</span><span class="val">领推荐奖金1800元</span></p><p><span class="ic_dot"></span><span class="phone">135****4594</span><span class="val">领推荐奖金1500元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">131****7344</span><span class="val">领推荐奖金3000元</span></p><p><span class="ic_dot"></span><span class="phone">135****6847</span><span class="val">领推荐奖金1300元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">138****6930</span><span class="val">领推荐奖金1800元</span></p><p><span class="ic_dot"></span><span class="phone">155****6072</span><span class="val">领推荐奖金3000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">138****4284</span><span class="val">领推荐奖金500元</span></p><p><span class="ic_dot"></span><span class="phone">155****6011</span><span class="val">领推荐奖金3000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">156****0049</span><span class="val">领推荐奖金1000元</span></p><p><span class="ic_dot"></span><span class="phone">135****6296</span><span class="val">领推荐奖金1800元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">158****8627</span><span class="val">领推荐奖金1300元</span></p><p><span class="ic_dot"></span><span class="phone">151****5534</span><span class="val">领推荐奖金1000元</span></p>					</div><div class="swiper-slide">
+						<p><span class="ic_dot"></span><span class="phone">156****2173</span><span class="val">领推荐奖金1500元</span></p><p><span class="ic_dot"></span><span class="phone">132****1627</span><span class="val">领推荐奖金1000元</span></p>					</div>			</div>
+			<div class="swiper-pagination"></div>
+			<img src="__STATIC__/index/picture/i_rec.png" class="msg_title">
+		</div>
+		<div class="page_iflist list-block media-list" id="pages" >
+			<div class="h_title">
+				<h2><i class="ic_line"></i>名企招聘</h2>
+				<a href="/Company/mingqi" class="t_more external">更多企业</a>
+			</div>
+			<ul class="f_list" id="demo">
+				
+			</ul>
+		</div>
+	</div>
+	<div class="page_totop" id="page_totop"><i class="icon2 icon2-dingbu"></i>顶部</div>
+</div>
+	<script src="__STATIC__/index/js/zepto.js"></script>
+	<script src="__STATIC__/index/js/tool.js"></script>
+	<script src="__STATIC__/index/js/main.js"></script>
+	<!-- <script>
+		Zepto.config = {
+			autoInit: false,
+			router: true,
+		}
+		if(checkSystem() == 3) {
+			if(is_store_page == 1) {
+				$('#wechat_header').show().siblings('#normal_header').remove();
+			} else {
+				$('#top_header').remove();
+			}
+		}
+	</script> -->
+	<script src="__STATIC__/index/js/sm.min.js"></script>
+	<script src="__STATIC__/index/js/sm-extend.min.js"></script>
+	<div style="display: none;">
+<script type="text/javascript" src="__STATIC__/city/city/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="__STATIC__/city/city/js/cityData.js"></script>
+<script type="text/javascript" src="__STATIC__/city/city/js/cityPicker.js"></script>
+<script type="text/javascript" src="/static/public/layui/layui.all.js"></script>
+		<script>
+		 var cityPicker = new IIInsomniaCityPicker({
+        data: cityData,
+        target: '#cityChoice',
+        valType: 'k-v',
+        hideCityInput: '#city',
+        hideProvinceInput: '#province',
+        callback: function(city_id){
+        	if ($('#cityChoice').val()) {
+        		$('#cityChoice span').text($('#cityChoice').val());
+        	}
+        	var city=$('#cityChoice').val();
+        	$("#demo").remove();
+            $("#pages").append("<ul id=\"demo\" class=\"f_list\"></ul>");
+            loaddata(city);
+
+           
+        }
+    });
+
+    cityPicker.init();
+		</script>
+		<script src="__STATIC__/index/js/z_stat.js" language="JavaScript"></script>
+		<script type="text/javascript">
+			loaddata();
+			function loaddata(city='',keywords=''){
+			layui.use('flow', function(){
+  var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+  var flow = layui.flow;
+  flow.load({
+    elem: '#demo', //指定列表容器
+    isAuto:'ture'
+    ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+      var lis = [];
+      //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+      $.get('index/dataadd?page='+page+'&city='+city+'&keywords='+keywords, function(res){
+        //假设你的列表返回在data集合中
+        if (res['code']==1) {
+        	layui.each(res.data, function(index, item){
+          lis.push(`<li>
+		<a href="javascript:urls(${item.id})" class="external item-content" data-no-cache="true">
+			<div class="item-media">
+				<img src="${item.thumb}" class="avator" alt="${item.thumb}">
+				<img src="__STATIC__/index/picture/tag_frecom.png" rel="nofollow" class="ic tag_frecom">			</div>
+			<div class="item-inner">
+				<div class="item-title" >${item.title}</div>
+				<div class="item-subtitle t_tag">${item.sex}</div>
+				<p class="h_tags">
+						<span class="h_tag">${item.tag[0]}</span>&nbsp;<span class="h_tag">${item.tag[1]}</span>&nbsp;<span class="h_tag">${item.tag[2]}</span>					
+				</p>				
+				<div class="item-title-row">
+	              <div class="item-subtitle t_price">${item.wagas}</div>
+	              <div class="item-after t_num">已报名：<em>${item.num}</em>人</div>
+	            </div>
+	       </div>
+		</a>
+	</li>`);
+        }); 
+        }
+        //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+        //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+        next(lis.join(''), page < res.pages);    
+      });
+    }
+  });
+});
+			}
+//关键字搜索
+function changes(){
+	layui.use('layer', function(){
+    var layer = layui.layer;
+    });              
+	       var sear=$('#search').val();
+	       if (sear) {
+            var vla=$('#cityChoice span').text();
+            if (vla!=''&&vla!='切换城市') {
+            $("#demo").remove();
+            $("#pages").append("<ul id=\"demo\" class=\"f_list\"></ul>");
+            	loaddata(vla,sear);
+            }else{
+            	 $("#demo").remove();
+                 $("#pages").append("<ul id=\"demo\" class=\"f_list\"></ul>");
+            	loaddata('',sear);
+            }
+        }else{
+           layer.msg('请输入查询数据',{icon: 5});
+        }
+}
+     //url跳转方法
+     function urls($id){
+     window.location.href='index/infos/id/'+$id;
+     }      
+          		
+		</script>
+	</div>
+</body>
+</html>

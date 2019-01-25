@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>tplay_main</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <script src="__PUBLIC__/echarts/echarts.min.js"></script>
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all">
+  <link rel="stylesheet" href="__CSS__/admin-1.css" media="all">
+  <script type="text/javascript" src="/static/public/jquery/jquery.min.js"></script>
+ <!--  <script type="text/javascript" src="/static/public/layui/lay/modules/layer.js"></script> -->
+  <script type="text/javascript" src="/static/public/layui/layui.js"></script>
+<body class="layui-layout-body" style="overflow-y:visible;">
+    <div class="layadmin-tabsbody-item layui-show"><div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;" id="tops">
+                <div carousel-item="">
+                  <ul class="layui-row layui-col-space5 layui-this">
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>会员</h3>
+                        <p><cite>{$web.user_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>文章</h3>
+                        <p><cite>{$web.article_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>文件</h3>
+                        <p><cite>{$web.file_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>留言</h3>
+                        <p><cite>{$web.message_num}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3" >
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>pc收录量</h3>
+                        <p><cite>{$count.pc}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>手机收录量</h3>
+                        <p><cite>{$count.m}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>文章总收录量</h3>
+                        <p><cite>{$count.tot}</cite></p>
+                      </a>
+                    </li>
+                    <li class="layui-col-xs3">
+                      <a lay-href="" class="layadmin-backlog-body">
+                        <h3>文章发布总数</h3>
+                        <p><cite>{$count.article}</cite></p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div style="text-align: center;"><button class="layui-btn layui-btn-xs" style="margin-bottom: 10px;" id="hidds" value="0"><i class="layui-icon">&#xe619;</i>隐藏</button></div>
+          <div class="layui-card">
+            <div class="layui-card-header"><span style="color: #009688">收录排名榜</span> <blockquote class="layui-elem-quote layui-quote-nm" style="height: 10px;float: right;margin-right: -15px;line-height: 10px">说明:此图为每天文章发布数据+文章收录+收录率+<a href="https://zhidao.baidu.com/question/458611346642438005.html" style="color: #5FB878">线索量</a>(数据自动更新)/天</blockquote></div>
+          <div class="layui-card-body">
+        
+            <div class="layui-btn-group" id="anniu">
+            <button class="layui-btn  layui-btn-primary layui-btn-sm" id="tod" value="0" type="button">今日</button>
+            <button class="layui-btn  layui-btn-primary layui-btn-sm" id="tom"
+            value="1">昨日</button>
+            <button class="layui-btn  layui-btn-primary layui-btn-sm" id="sev"
+            value="2">近7天</button>
+            <button class="layui-btn  layui-btn-primary layui-btn-sm" id="mat"
+            value="3">近30天</button>
+            <button class="layui-btn layui-btn-sm layui-disabled" id="alls" >全部</button>
+          </div>
+<div class="layui-input-inline" style="margin:0px 15px 0px 15px">
+            <div class="layui-inline">
+              <div class="layui-input-inline">
+                
+                <input type="text" class="layui-input" id="create_time" placeholder="选择时间" name="create_time">
+
+              </div>
+            </div>
+          </div>
+<button class="layui-btn layui-btn-sm" id="times">
+  <i class="layui-icon">&#xe615;</i> 搜索
+</button>
+<button class="layui-btn layui-btn-sm layui-disabled" >
+  <i class="layui-icon">&#xe63c;</i> 导出
+</button>
+<button class="layui-btn layui-btn-sm layui-disabled" >
+  <i class="layui-icon">&#xe621;</i> 打印
+</button>
+<div class="layui-btn-group" style="float: right;">
+  <button class="layui-btn layui-btn-primary layui-btn-sm">
+   <i class="layui-icon">&#xe62d;</i>表
+  </button>
+  <button class="layui-btn layui-btn-primary layui-btn-sm">
+    <i class="layui-icon">&#xe62c;</i>图
+  </button>
+
+</div>
+
+
+            <table class="layui-table">
+  <colgroup>
+    <col width="150">
+    <col width="200">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>排名</th>
+      <th>昵称</th>
+      <th>发布文章数</th>
+      <th>文章收录</th>
+      <th>文章收录率</th>
+      <th>文章线索量</th>
+    </tr> 
+  </thead>
+  <tbody id='tb'>
+     {volist name="shoulus" id="vo" k="key"}
+    <tr>
+      <td>{$vo.desc}</td>
+      <td>{$vo.name}</td>
+      <td>{$vo.article_tot}</td>
+      <td>{$vo.shoulu_tot}</td>
+      <td>{$vo.gailv}</td>
+      <td>{$vo.xiansuo}</td>
+    </tr>
+     {/volist}
+  </tbody>
+</table>
+            
+            </div>
+          </div>
+        </div>
+        <!-- 开始数据统计 -->
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <div class="layui-card-header"><span style="color: #009688">文章分析表</span> <blockquote class="layui-elem-quote layui-quote-nm" style="height: 10px;float: right;margin-right: -15px;line-height: 10px;">说明:此图为每天文章发布总数据+文章总收录+收录率(数据自动更新)/月</blockquote></div>
+            <div class="layui-card-body" id="mains" style="height: 500px;">
+
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <div class="layui-card-header">文章收录分析表</div>
+            <div class="layui-card-body" id="main" style="height: 500px;">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  </div>
+  </div>
+<script type="text/javascript">
+
+        /*基于准备好的dom，初始化echarts实例*/
+        var myChart = echarts.init(document.getElementById('main'));
+var weishoulu={$count.article}-{$count.tot};
+        /*指定图表的配置和数据*/
+     // app.title = '正负条形图';
+
+// app.title = '堆叠条形图';
+
+option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:[{volist name="shoulu" id="vo"}'{$vo.name}',{/volist}]
+    },
+    series: [
+        {
+            name:'文章收录率',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:weishoulu, name:'未收录数量', selected:true},
+                {value:{$count.tot}, name:'收录数量'},
+                
+            ]
+        },
+        {
+            name:'文章收录率',
+            type:'pie',
+            radius: ['40%', '55%'],
+            label: {
+                normal: {
+                    formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                    backgroundColor: '#eee',
+                    borderColor: '#aaa',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    shadowBlur:3,
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 2,
+                    shadowColor: '#999',
+                    padding: [0, 5],
+                    rich: {
+                        a: {
+                            color: '#999',
+                            lineHeight: 21,
+                            align: 'center'
+                        },
+                        // abg: {
+                        //     backgroundColor: '#333',
+                        //     width: '100%',
+                        //     align: 'right',
+                        //     height: 22,
+                        //     borderRadius: [4, 4, 0, 0]
+                        // },
+                        hr: {
+                            borderColor: '#aaa',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            height: 0
+                        },
+                        b: {
+                            fontSize: 16,
+                            lineHeight: 33
+                        },
+                        per: {
+                            color: '#eee',
+                            backgroundColor: '#334455',
+                            padding: [2, 4],
+                            borderRadius: 2
+                        }
+                    }
+                }
+            },
+            data:[
+                {volist name="shoulu" id="vo"}{value:{$vo.shoulu_tot}, name:'{$vo.name}'},{/volist}
+                
+            ]
+        }
+    ]
+};
+
+
+
+        
+        myChart.setOption(option);
+    </script>
+    <script type="text/javascript">
+var a = "{$web.date_string}";
+var date = a.split(",");
+
+var b = "{$web.shoulu}";
+var login_sum = b.split(",");
+
+var c = "{$web.article}";
+var article_c = c.split(",");
+
+var d = "{$web.shoululv}";
+var article_d = d.split(",");
+
+
+var myChart = echarts.init(document.getElementById('mains'));
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            crossStyle: {
+                color: '#999'
+            }
+        }
+    },
+    toolbox: {
+        feature: {
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+    legend: {
+        data:['文章数','收录数','收录率']
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: date,
+            axisPointer: {
+                type: 'shadow'
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '文章数量',
+            min: 0,
+            max:250,
+            interval:50,
+            axisLabel: {
+                formatter: '{value} 篇'
+            }
+        },
+        {
+            type: 'value',
+            name: '收录率',
+            min: 0,
+            max: 100,
+            interval: 20,
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }
+    ],
+    series: [
+        {
+            name:'文章数',
+            type:'bar',
+            data:article_c
+        },
+        {
+            name:'收录数',
+            type:'bar',
+            data:login_sum
+        },
+        {
+            name:'收录率',
+            type:'line',
+            yAxisIndex: 1,
+            data:article_d
+        }
+    ]
+};
+
+myChart.setOption(option);
+</script>
+<script type="text/javascript">
+layui.use('layer', function(){
+  var layer = layui.layer; 
+    $('#tod').click(function(){
+      var id = $(this).val();
+        $.ajax({
+          url:"{:url('admin/main/articlecheck')}",
+          data:{id:id},
+          type:'post',
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              $("#tb tr").remove();
+            var lis = [];
+           layui.each(res.data, function(index, item){
+          lis.push(` 
+                    <tr>
+                    <td>${item.desc}</td>
+                    <td>${item.name}</td>
+                    <td>${item.article_tot}</td>
+                    <td>${item.shoulu_tot}</td>
+                    <td>${item.gailv}</td>
+                    <td>${item.xiansuo}</td>
+                  </tr>`);
+        }); 
+          //把数据放到表单中
+          $("#tb").html(lis);
+          $("#anniu button").eq(0).removeClass('layui-btn-primary').siblings().addClass('layui-btn-primary');
+          
+            }
+          }
+        });
+    });
+    //昨天数据
+    $('#tom').click(function(){
+      var id = $(this).val();
+        $.ajax({
+          url:"{:url('admin/main/articlecheck')}",
+          data:{id:id},
+          type:'post',
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              $("#tb tr").remove();
+            var lis = [];
+           layui.each(res.data, function(index, item){
+          lis.push(` 
+                    <tr>
+                    <td>${item.desc}</td>
+                    <td>${item.name}</td>
+                    <td>${item.article_tot}</td>
+                    <td>${item.shoulu_tot}</td>
+                    <td>${item.gailv}</td>
+                    <td>${item.xiansuo}</td>
+                  </tr>`);
+        }); 
+          //把数据放到表单中
+          $("#tb").html(lis);
+          $("#anniu button").eq(1).removeClass('layui-btn-primary').siblings().addClass('layui-btn-primary');
+          
+            }
+          }
+        });
+    });
+     $('#sev').click(function(){
+      var id = $(this).val();
+        $.ajax({
+          url:"{:url('admin/main/articlecheck')}",
+          data:{id:id},
+          type:'post',
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              $("#tb tr").remove();
+            var lis = [];
+           layui.each(res.data, function(index, item){
+          lis.push(` 
+                    <tr>
+                    <td>${item.desc}</td>
+                    <td>${item.name}</td>
+                    <td>${item.article_tot}</td>
+                    <td>${item.shoulu_tot}</td>
+                    <td>${item.gailv}</td>
+                    <td>${item.xiansuo}</td>
+                  </tr>`);
+        }); 
+          //把数据放到表单中
+          $("#tb").html(lis);
+          $("#anniu button").eq(2).removeClass('layui-btn-primary').siblings().addClass('layui-btn-primary');
+          
+            }
+          }
+        });
+    });
+     $('#mat').click(function(){
+      var id = $(this).val();
+        $.ajax({
+          url:"{:url('admin/main/articlecheck')}",
+          data:{id:id},
+          type:'post',
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              $("#tb tr").remove();
+            var lis = [];
+           layui.each(res.data, function(index, item){
+          lis.push(` 
+                    <tr>
+                    <td>${item.desc}</td>
+                    <td>${item.name}</td>
+                    <td>${item.article_tot}</td>
+                    <td>${item.shoulu_tot}</td>
+                    <td>${item.gailv}</td>
+                    <td>${item.xiansuo}</td>
+                  </tr>`);
+        }); 
+          //把数据放到表单中
+          $("#tb").html(lis);
+          $("#anniu button").eq(3).removeClass('layui-btn-primary').siblings().addClass('layui-btn-primary');
+          
+            }
+          }
+        });
+    });
+      $('#times').click(function(){
+      var time = $("#create_time").val();
+      if (time=='') {
+          layer.msg('请选择时间');
+      }else{
+        $.ajax({
+          url:"{:url('admin/main/articlecheck')}",
+          data:{time:time,id:4},
+          type:'post',
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              $("#tb tr").remove();
+            var lis = [];
+           layui.each(res.data, function(index, item){
+          lis.push(` 
+                    <tr>
+                    <td>${item.desc}</td>
+                    <td>${item.name}</td>
+                    <td>${item.article_tot}</td>
+                    <td>${item.shoulu_tot}</td>
+                    <td>${item.gailv}</td>
+                    <td>${item.xiansuo}</td>
+                  </tr>`);
+        }); 
+          //把数据放到表单中
+          $("#tb").html(lis);
+          
+            }
+          }
+        });
+    }
+    });
+      });    
+    </script>
+    <script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#create_time' //指定元素
+  });
+});
+$("#hidds").click(function(){
+  var hids=$("#hidds").val();
+   if (hids==0) {
+    $("#tops").hide();
+    $("#hidds").val('1');
+     $("#hidds").html('<i class="layui-icon">&#xe61a;</i>显示');
+  }else{
+    $("#tops").show();
+    $("#hidds").val('0');
+    $("#hidds").html('<i class="layui-icon">&#xe619;</i>隐藏');
+  }
+});
+</script>
+</body>
+</html>

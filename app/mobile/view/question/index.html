@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+<title>{$keywords.name}</title>
+<meta name="keywords" content="{$keywords.keywords}">
+<meta name="description" content="{$keywords.desc}">
+<meta name="x5-fullscreen" content="true">	
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content=" initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no" />
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+<link rel="stylesheet" href="__STATIC__/question/css/sm.css">
+<link rel="stylesheet" href="__STATIC__/question/css/sm-extend.min.css">
+	
+	<link rel="stylesheet" href="__STATIC__/question/css/home.css">
+	
+
+	<script src="/static/public/layui/layui.all.js" merge="true"></script>
+	<script src="/static/public/jquery/jquery.min.js" merge="true"></script>
+	<!-- <link rel="stylesheet" href="css/wap.all.css"> -->
+	
+	
+</head>
+<body>
+
+<div class="page page_a" id="page_ask_list" >
+	<header class="bar bar-nav bar_index">
+        <a class="back pull-left"><span class="icon icon-left"></span></a>
+        <a class="pull-right"><span class="icon icon2 icon2-share_light act_share"></span></a>
+        <h1 class="title">{$data.name}</h1>
+    </header>
+	<nav class="bar bar-tab ">
+		<a href="{:url('input',['id'=>$data.id])}" onclick="message()" class="button button-round button-fill external ">我要提问</a>
+	</nav>
+	<div class="content infinite-scroll infinite-scroll-bottom" data-distance="100" data-ajax="/Question/index/type/1/type_id/204.html">
+		<ul class="page_alist">
+			{volist name="$messages" id="vo"}
+			<li>
+		<div class="l_user">
+			<span class="l_times">{$vo.create_time}</span>
+			<img src="picture/user_default.png@!img_80_80_90" alt="">
+			<span class="l_name">匿名</span>
+		</div>
+		<div class="l_item l_from">
+			<span class="ico_t ico_from">问</span>{$vo.message}</div>
+		<div class="l_item l_to item_close">
+			<span class="ico_t ico_to">答</span>{$vo.reply.reply}
+		</div>
+	</li>
+	{/volist}
+</ul>
+			</div>
+</div>
+
+
+<script src="__STATIC__/question/js/zepto.js"></script>
+<script>
+$.config = {
+	autoInit: false
+}
+</script>
+<script src="__STATIC__/question/js/sm.min.js"></script>
+<script src="__STATIC__/question/js/sm-extend.min.js"></script>
+<script src="__STATIC__/question/js/sm-city-picker.js"></script>
+<script src="__STATIC__/question/js/tool.js"></script>
+<script src="__STATIC__/question/js/list.js"></script>
+
+<div id="share_modal" class="actions-modal share_modal">
+	<div class="actions-modal-group"><span class="actions-modal-label">请选择</span>
+	<div class="share_mlist row" id="share_mlist">
+		<a href="#" onclick="shareEvent(this);" class="external col-33 sm1"><span class="icon icon-pengyouquan"></span>朋友圈</a>
+		<a href="#" onclick="shareEvent(this);" class="external col-33 sm2"><span class="icon icon-sweixin"></span>微信</a>
+		<a href="#" onclick="shareEvent(this);" class="external col-33 sm3"><span class="icon icon-scqq"></span>QQ</a>
+		<a href="http://s.jiathis.com/?webid=qzone&url=http://m.gonglf.com:80/Question/index/type/1/type_id/204.html&title=山东歌尔声学分享问答&summary=山东歌尔声学分享问答&uid=1591338&data_track_clickback=true&pic=" target="_blank" data-id="undefined" class="external col-33 sm4"><span class="icon icon-sqzone"></span>QQ空间</a>
+		<a href="http://s.jiathis.com/?webid=tsina&url=http://m.gonglf.com:80/Question/index/type/1/type_id/204.html&title=山东歌尔声学分享问答&summary=山东歌尔声学分享问答&uid=1591338&data_track_clickback=true&pic=&appkey=2658546502&ralateUid=5261629664" target="_blank" data-id="undefined" class="external col-33 sm5"><span class="icon icon-stsina"></span>新浪微博</a>
+	</div>
+
+	</div><div class="actions-modal-group"><span class="actions-modal-button bg-danger" id="share_close">取消</span></div>
+</div>
+<style type="text/css">
+	.share-weixin,.share-iphone,.share-android {
+		position: fixed;
+		display: none;
+	    width: 100%;
+	    height: 100%;
+	    left: 0;
+	    bottom: 0;
+	    text-align: center;
+	    background: rgba(0,0,0,.7);
+	    z-index: 9999;
+	}
+	.share-weixin .share_pic1 {
+		margin-top: 1rem;
+	}
+	.share-weixin .share-know {
+		width: 36%;
+		margin-top: 1.5rem;
+	}
+	.share-iphone .share-know {
+		/*margin-top:;*/
+	}
+	.share-iphone .share-know {
+		width: 36%;
+		margin-top: 1rem;
+	}
+	.share-android .share-know {
+		width: 36%;
+		margin-top: 15rem;
+	}
+	.share-android .share-pic2 {
+		width: 64%;
+		margin-top: 1rem;
+	}
+</style>
+<!-- 微信浏览器打开的时候分享 -->
+<div class="share-weixin" id="share-weixin">
+	<img class="share_pic1" width="100%" src="picture/share_pic1.png">
+	<img class="share-know" src="picture/share_know.png">
+</div>
+<!-- 苹果浏览器打开时的分享 -->
+<div class="share-iphone" id="share-iphone">
+	<br>
+	<img width="100%" src="picture/share_a1.png">
+	<img width="100%" src="picture/share_a2.png">
+	<img width="100%" src="picture/share_a3.png">
+	<img width="100%" src="picture/share_a4.png">
+	<img class="share-know" src="picture/share_know.png">
+</div>
+<!-- 安卓浏览器打开时的分享 -->
+<div class="share-android" id="share-android">
+	<img class="share-know" src="picture/share_know.png">
+	<img class="share-pic2" src="picture/share_pic2.png">
+</div>
+
+<script type="text/javascript" src="__STATIC__/question/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+	wx.config({
+		debug: false,
+		appId: 'wxc171b0f334c12124',
+		timestamp: 1542093510,
+		nonceStr: 'XcgWkBretck3sDSX',
+		signature: '6d13fb2c18c5e986e6445540c866a4778bae21a2',
+		jsApiList: [
+			// 所有要调用的 API 都要加到这个列表中
+			'checkJsApi',
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage',
+			'onMenuShareQQ',
+			'onMenuShareWeibo',
+			'onMenuShareQZone'
+		]
+	});
+	wx.ready(function () {
+		var shareData = {
+		title: '山东歌尔声学分享问答',
+		desc: '山东歌尔声学分享问答',
+		link: 'http://m.gonglf.com:80/Question/index/type/1/type_id/204.html',
+		imgUrl: 'http://img.gonglf.com/company/7e9504c85bbf145bf1662a69ae910f24.jpg@!img_480_320'
+	};
+	wx.onMenuShareAppMessage(shareData);
+	wx.onMenuShareTimeline(shareData);
+	wx.onMenuShareQQ(shareData);
+	wx.onMenuShareWeibo(shareData);
+	wx.onMenuShareQZone(shareData);
+  });
+</script>
+<!-- <script type="text/javascript">
+function message(){
+layer.prompt({
+  formType: 2,
+  value: '请留下您的联系方式,我们会第一时间回复你！',
+  title: '请输入留言信息',
+  maxlength: 150,
+  area: ['260px', '100px'],
+}, 
+ function(value,index){
+ if (value){
+$.ajax({
+    type : 'post',
+    url  : '/index/index/mess',
+    data : {'message':value,'recruit_id':{$data.id},'types':'mobile'},
+    dataType:'json',
+    success : function(res){
+        if(res.code == 1){
+           layer.msg(res.msg,{icon: 6}); 
+        }
+        if(res.code == 0){
+         layer.msg(res.msg,{icon: 2});
+        }
+    }
+  });
+ }else{
+      layer.msg('不能为空',{icon: 6});
+ }
+  //layer.close(index);
+}
+)};
+</script> -->
+</body>
+</html>
+
+<!-- home模板文件 -->

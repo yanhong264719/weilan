@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{$keywords.name}</title>
+	<meta name="keywords" content="{$keywords.keywords}">
+	<meta name="description" content="{$keywords.desc}">
+	<meta name="author" content="{$keywords.desc}">
+	<meta name="viewport" content=" initial-scale=1, maximum-scale=1">
+	<meta name="full-screen" content="true">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="stylesheet" href="__STATIC__/baoming/css/sm.css">
+	<link rel="stylesheet" href="__STATIC__/baoming/css/sm-extend.min.css">
+	<link rel="canonical" href=""/>
+	<link rel="stylesheet" href="__STATIC__/baoming/css/user.css">
+	<link rel="stylesheet" href="/static/public/layui/css/layui.css">
+			<style>
+		.page_ilink a{color:#333;}
+	</style>
+</head>
+<body>
+<div class="page page_u" id="page_user_signup" >
+	<header class="bar bar-nav" id="top_header">
+		<a class="pull-left back"><span class="icon icon-left"></span></a>
+		<h1 class="title">一键报名</h1>
+	</header>
+	<div class="content page_u_info page_u_join">
+		<div class="list-block info_list">
+			<form>
+			<ul>
+				<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label" style="width: 25%;">意向企业</div>
+								<div class="item-input">
+									{$data.name}							</div>
+							</div>
+						</div>
+					</li>								<!-- 未登录 -->
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label" style="width: 25%;">姓名</div>
+								<div class="item-input">
+									<input type="text" name="name" id="name" placeholder="请输入姓名" value="">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label" style="width: 25%;">手机号</div>
+								<div class="item-input">
+									<input type="tel" name="mobile" id="mobile" placeholder="请输入手机号码" >
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label" style="width: 25%;">邮箱</div>
+								<div class="item-input">
+									<input type="tel" name="email" id="email" placeholder="请输入邮箱" >
+									<input type="hidden" name="type" id="type" value="mobile">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label" style="width: 25%;">验证码</div>
+								<div class="item-input">
+									<input type="tel" name="captcha" id="captcha" placeholder="请输入图形验证码">
+								</div>
+								<div class="item-after" style="width:100px;">
+									<img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?seed='+Math.random()" height="36" style="margin-top: 1px" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- <li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label" style="width: 25%;">验证码</div>
+								<div class="item-input">
+									<input type="tel" name="code" placeholder="" value="">
+								</div>
+								<div class="item-after" style="width:120px;"><a data-ajax="/Sms/smsSend/type/5.html" class="mark_btn" id="mark_btn">获取邮箱验证码</a></div>
+							</div>
+						</div>
+					</li> -->
+				<!-- <li>
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title label" style="width: 25%;">我现在在哪</div>
+							<div class="item-input">
+								<input type="text" name="locality" placeholder="请选择位置信息" id="join_place2">
+								<input type="hidden" name="work_area" value='{"0":{"id":"110000","name":"北京"},"1":{"id":"110100","name":"北京"},"2":{"id":"110101","name":"东城"}}'>
+							</div>
+						</div>
+					</div>
+				</li> -->
+			</ul>
+			</form>
+			<a href="javascript:;" class="button button-fill button-big btn_submit" id="btn_login">立即报名</a>
+		</div>
+	</div>
+</div>
+	<script src="__STATIC__/baoming/js/zepto.js"></script>
+	<script src="__STATIC__/baoming/js/tool.js"></script>
+
+	<script src="__STATIC__/baoming/js/sm.min.js"></script>
+	<script src="__STATIC__/baoming/js/sm-extend.min.js"></script>
+	<script src="/static/public/js/jquery.js"></script>
+	<script src="/static/public/layui/layui.all.js"></script>
+		<div style="display: none;">
+	</div>
+</body>
+<script type="text/javascript">
+
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+	$('#btn_login').click(function(){
+      var email = $('#email').val();
+      var captcha= $('#captcha').val();
+      var mobile = $('#mobile').val();
+      var name = $('#name').val();
+      var type = $('#type').val();
+      $.ajax({
+        type:"post",
+        url:"{:url('mobile/index/login')}",
+        data:{email:email,captcha:captcha,mobile:mobile,name:name,type:type},
+        success:function(res){
+          
+          if(res.code == 1) {
+            layer.msg(res.msg);
+            setTimeout(window.location.href="{:url('index')}",3000);
+           //setTimeout("location.href='index/index'",3000);
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+      });
+  });
+	});
+</script>
+</html>

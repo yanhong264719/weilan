@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">设计列表</li>
+      </ul>
+    </div> 
+    <table class="layui-table" lay-size="sm">
+      <colgroup>
+        <col width="50">
+        <col width="200">
+        <col width="150">
+        <col width="100">
+        <col width="100">
+        <col width="200">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>设计名称</th>
+          <th>类型</th>
+          <th>时间</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr> 
+      </thead>
+      <tbody>
+        {volist name="liebiao" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td>{$vo.title}</td>
+          <td><a href="{$vo.thumb|geturl}" class="tooltip"><img src="{$vo.thumb|geturl}" width="20" height="20"></a></td>
+          <td>{$vo.cate.name}</td>
+          <td>{$vo.admin.nickname}</td>
+          <td>{$vo.create_time}</td>
+          <td>{$vo.edit_admin}</td>
+          <td>{$vo.update_time}</td>
+          <td><a href="javascript:;" style="font-size:18px;" class="is_top" data-id="{$vo.id}" data-val="{$vo.is_top}">{eq name="vo.is_top" value="1"}<i class="fa fa-toggle-on"></i>{else /}<i class="fa fa-toggle-off"></i>{/eq}</a></td>
+          <td><a href="javascript:;" style="font-size:18px;" class="status" data-id="{$vo.id}" data-val="{$vo.status}">{eq name="vo.status" value="1"}<i class="fa fa-toggle-on"></i>{else /}<i class="fa fa-toggle-off"></i>{/eq}</a></td>
+          <td class="operation-menu">
+            <div class="layui-btn-group">
+              <a href="{:url('admin/article/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+              <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-primary delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+            </div>
+          </td>
+        </tr>
+        {/volist}
+      </tbody>
+    </table>
+
+    {include file="public/foot"}
+    <script type="text/javascript">
+
+    $('.delete').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要删除?', function(index) {
+        $.ajax({
+          url:"{:url('admin/article/delete')}",
+          data:{id:id},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
+    })
+    </script>
+    <script type="text/javascript">
+
+    $('.is_top').click(function(){
+      var val = $(this).attr('data-val');
+      var id = $(this).attr('data-id');
+      var i = $(this).find('i');
+      var the = $(this);
+      if(val == 1){
+        var is_top = 0;
+      } else {
+        var is_top = 1;
+      }
+      $.ajax({
+        type:"post",
+        url:"{:url('admin/article/is_top')}",
+        data:{is_top:is_top,id:id},
+        success:function(res){
+          
+          if(res.code == 1) {
+            top();
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+      })
+
+      function top(){
+        if(val == 1){
+          i.attr("class","fa fa-toggle-off");
+          the.attr('data-val',0);
+        } else {
+          i.attr("class","fa fa-toggle-on");
+          the.attr('data-val',1);
+        }
+      }
+    })
+
+
+    $('.status').click(function(){
+      var val = $(this).attr('data-val');
+      var id = $(this).attr('data-id');
+      var i = $(this).find('i');
+      var the = $(this);
+      if(val == 1){
+        var status = 0;
+      } else {
+        var status = 1;
+      }
+      $.ajax({
+        type:"post",
+        url:"{:url('admin/article/status')}",
+        data:{status:status,id:id},
+        success:function(res){
+          
+          if(res.code == 1) {
+            tostatus();
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+      })
+
+      function tostatus(){
+        if(val == 1){
+          i.attr("class","fa fa-toggle-off");
+          the.attr('data-val',0);
+        } else {
+          i.attr("class","fa fa-toggle-on");
+          the.attr('data-val',1);
+        }
+      }
+    })
+    </script>
+  </div>
+</body>
+</html>

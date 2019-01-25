@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>
+                layui
+            </title>
+            <meta content="webkit" name="renderer">
+                <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+                    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+                        <link href="__PUBLIC__/layui/css/layui.css" media="all" rel="stylesheet">
+                            <link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" rel="stylesheet"/>
+                            <link href="__CSS__/admin.css" media="all" rel="stylesheet">
+                            
+                        
+                    
+         <style>
+                .suggestionsBox { 
+                position: relative; 
+                left: 110px; 
+                margin: 1px 0px 0px 0px; 
+                width: 448px;
+                
+                border: 1px solid #e2e2e2; 
+                color: #000; 
+                } 
+                .suggestionList { 
+                margin: 0px; 
+                padding: 0px; 
+                } 
+                .suggestionList li { 
+                margin: 0px 0px 3px 0px; 
+                padding: 3px; 
+                cursor: pointer; 
+                } 
+                .suggestionList li:hover { 
+                color: #5FB878; 
+                } 
+            </style>       
+            
+        
+    </head>
+    <body style="padding:10px;">
+        <div class="layui-fluid">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li>
+                        <a class="a_menu" href="{:url('admin/article/index')}">
+                            文章管理<span class="layui-badge">{$numbers.guanli}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="a_menu" href="{:url('admin/article/publish')}">
+                            文章录入
+                        </a>
+                    </li>
+                    <li class="layui-this">
+                        文章设计
+                    </li>
+                    <li>
+                        <a class="a_menu" href="{:url('admin/article/generate')}">
+                            文章生成
+                        </a>
+                    </li>
+                    <li>
+                        <a class="a_menu" href="{:url('admin/publish/index')}">
+                            文章发布<span class="layui-badge layui-bg-green">{$numbers.fabu}</span>
+                        </a>
+                    </li>
+                    <li><a href="{:url('admin/article/shouluinfo')}" class="a_menu">文章收录管理<span class="layui-badge layui-bg-blue">{$numbers.shoulu}</a></span></a></li>
+                </ul>
+            </div>
+            <div style="margin-top: 20px;">
+            </div>
+            <div class="layui-fluid">
+                <form action="{:url('admin/article/generate')}" class="layui-form" method="post">
+                <div class="layui-card">
+                        <div class="layui-card-header">
+                            文章标题
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">
+                                    文章标题
+                                </label>
+                                <div class="layui-input-block">
+                                    <input id="inputString" onkeyup="lookup(this.value);" onblur="fill();" autocomplete="off" class="layui-input" name="title" placeholder="请输入标题" type="text" style="width:450px;">
+                                </div>
+                                <div class="suggestionsBox" id="suggestions" style="display: none;"> 
+                                  <!-- <img src="upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />  -->
+                                  <div class="suggestionList" id="autoSuggestionsList"> </div> 
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                      <!-- 三级分类 -->
+        <!-- <div class="layui-card"> -->
+         <div class="layui-card-header">文章总数<span class="layui-badge layui-bg-orange">{$article_number}</span></div>
+           <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                  <ul class="layui-tab-title" id="yiji">
+                    {volist name="article_cate" id="vo" key="k"}
+                    <li class="">{$vo.name}<span class="layui-badge">{$vo.counts}</span></li> 
+                    {/volist}
+                  </ul>
+
+                  <!-- 二级菜单 -->
+                  <div class="layui-tab-content" style="height: 150px;">
+                    
+                         {volist name="cateArr" key="k" id="vo"}
+                        <div class="layui-tab-item erji" >
+                           
+                        <div class="layui-collapse ">
+                            <!-- 二级菜单 -->
+                            {volist name="vo['erji']" id="v"}
+                            <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">{$v.name}<span class="layui-bg-green">{$v.count}</span></h2>
+                            <div class="layui-colla-content">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">勾选标签</label>
+                                    <!-- 三级菜单 -->
+                                    <div class="layui-input-block">
+                                       {volist name="v['sanji']" id="vv"}
+                                      <input type="checkbox" name="pid[]" title="{$vv.name}{$vv.count}" value="{$vv.id}">
+                                      {/volist}
+                                    </div>
+                                  </div>
+                            </div>
+                            </div>
+                            {/volist}
+                           <!-- 二级菜单 -->
+
+                        </div>
+
+                        </div>
+                        {/volist}
+                         
+                        
+                 </div>
+            
+           </div>
+      <!--     </div>  -->      
+                      <!-- 三级分类 -->
+                      <div style="margin-top:400px"></div>
+                    <div class="layui-card" style="margin-top:50px;position: fixed;bottom: 0;width: 100%;">
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-filter="formDemo" lay-submit="">
+                                        立即提交
+                                    </button>
+                                    <button class="layui-btn layui-btn-primary" type="reset">
+                                        重置
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <script src="__PUBLIC__/layui/layui.js">
+            </script>
+            <script src="__PUBLIC__/jquery/jquery.min.js">
+            </script>
+        </div>
+        <script>
+            //Demo
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  // form.on('submit(formDemo)', function(data){
+  //   layer.msg(JSON.stringify(data.field));
+  //   return false;
+  // });
+});
+        </script>
+        <script>
+            //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  
+  //…
+});
+        </script>
+        <script type="text/javascript">
+            function DataBinder(object_id){
+        var pubSub = jQuery({});
+        var data_attr = "bind-"+object_id,
+            message = object_id+":change";
+        jQuery(document).on("change","[data-" + data_attr +"]",function(evt){
+            var $input = jQuery(this);
+            pubSub.trigger(message, [$input.attr("data-" + data_attr), $input.val()]);
+        });
+        pubSub.on(message, function(evt,prop_name,new_val){
+            jQuery("[data-" + data_attr + "=" + prop_name + "]").each(function(){
+                var $bound = jQuery(this);
+                if($bound.is("input,textarea,select")) {
+                    $bound.val(new_val);
+                }
+                else{
+                    $bound.html(new_val);
+                }
+            });
+        });
+        return pubSub;
+    }
+ 
+    function User(uid){
+        var binder = new DataBinder(uid),
+            user = {
+                attributes: {},
+                set: function(attr_name,val){
+                    this.attributes[attr_name] = val;
+                    binder.trigger(uid + ":change", [attr_name, val, this]);
+                },
+ 
+                get: function(attr_name){
+                    return this.attributes[attr_name];
+                },
+                _binder: binder
+            };
+       
+          return user;
+    }
+ 
+    var user = new User(0);
+    user.set("name","请输入标题");
+        </script>
+        <script>
+            $("#yiji li").eq(0).addClass("layui-this");
+      $("#cate_show div").eq(0).addClass("layui-show");
+      $(".erji").eq(0).addClass("layui-show");
+     //  $("#article_cates li").click(function() {
+     //    var id=$(this).val();
+     //    if (id) {
+     //   $.ajax({
+     //                  url:"{:url('admin/article/design')}",
+     //                  data:{'id':id},
+     //                  type:'post',
+     //                  async: false,
+     //                  success:function(res) {
+     //                      if(res.code == 1) {
+     //                          empty()
+     //                          layer.msg('数据加载成功');
+     //                      } else {
+     //                          layer.msg(res.msg);
+     //                      }
+     //                  }
+     //              })
+     // };
+     //  });
+      //思路：找到第一个请求给值  当点击第二个的时候又发送一次请求，在赋值就行
+        </script>
+        <script type="text/javascript"> 
+  function lookup(inputString) { 
+    if(inputString.length == 0) { 
+      $('#suggestions').hide(); 
+    } else { 
+      $.post("{:url('admin/article/ajaxTitle')}", {queryString: ""+inputString+""}, function(data){ 
+        // console.log(data); 
+          $('#autoSuggestionsList').empty();
+          $.each(data,function(index, item){
+            var htmltitle = '<li>'+item.value+'</li>';
+            $('#suggestions').show(); 
+            $('#autoSuggestionsList').append(htmltitle);
+            $('#autoSuggestionsList li').click(function(){
+              var v = $(this).html();
+              $('#inputString').val(v);
+              setTimeout("$('#suggestions').hide();", 200);
+            });
+          })   
+      });
+    } 
+  } 
+  function fill(thisValue) { 
+    $('#inputString').val(thisValue); 
+    setTimeout("$('#suggestions').hide();", 200); 
+  } 
+</script> 
+    </body>
+</html>

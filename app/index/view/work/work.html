@@ -1,0 +1,394 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	
+	<title>普工招聘信息_电子厂招聘信息_工厂招聘信息网站-工立方打工网</title>
+	<meta name="keywords" content="普工招聘信息，电子厂招聘信息，工厂招聘信息，普工招聘信息网站，电子厂招聘信息网站，工厂招聘信息网站" />
+	<meta name="description" content="工立方是专业的普工招聘信息网站，电子厂招聘信息网站，工厂招聘信息网站，全国已有300多家县级服务门店，信息100%真实有效，让您轻松进大厂工作。" />
+
+	<link href="__STATIC__/work/css/style-main.css" rel="stylesheet" />
+	<link href="__STATIC__/work/css/style-fac.css" rel="stylesheet" />
+	<script src="/static/work/js/jquery.js"></script>
+	<script src="/static/work/js/layer.js" merge="true"></script>
+	<script src="/static/work/js/main.js"></script>
+	<script src="/static/work/js/fac.js"></script>
+	<script type="text/javascript">
+		var site_url = 'http://m.gonglf.com/';
+	</script>
+	<script src="js/ckbrowser.js" type="text/javascript"></script><!-- 判断客户端并对文章进行跳转 -->
+<style type="text/css">
+	.aa span{
+     margin-left: 15px;
+     cursor: pointer;
+     
+}
+.hidd_a{
+	display:none;
+}
+.text_hide{width: 238px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+li{
+	list-style:none;
+}
+</style>
+</head>
+<body>
+{include file="common/header"}	
+<div class="breadcrumb">
+	<ul class="section">
+		<li>您现在的位置：</li>
+		<li><a href="/">首页</a> <span class="divider">></span></li>
+		<li class="active">找工作</li>
+	</ul>
+</div>
+<div class="fac_wrap wrap">
+	<div class="section fac_filter">
+		<div class="clearfix fac_filter_top">
+			<div class="fac_filter_city around">
+				<a href="javascript:void(0);" class="city_v"><i class="ic ic_fac_search"></i>{$city?$city:"切换城市"}</a>
+				<ul>
+					<li><a href="{:url('index/work/work')}">全部城市</a></li>
+					<li><a href="javascript:goSort('city','北京市');">北京市</a></li>
+					<li><a href="javascript:goSort('city','天津市');">天津市</a></li>
+					<li><a href="javascript:goSort('city','太原市');">太原市</a></li>
+					<li><a href="javascript:goSort('city','上海市');">上海市</a></li>
+					<li><a href="javascript:goSort('city','南京市');">南京市</a></li>
+					<li><a href="javascript:goSort('city','无锡市');">无锡市</a></li>
+					<li><a href="javascript:goSort('city','常州市');">常州市</a></li>
+					<li><a href="javascript:goSort('city','苏州市');">苏州市</a></li>
+					<li><a href="javascript:goSort('city','南通市')">南通市</a></li>
+					<li><a href="javascript:goSort('city','淮安市')">淮安市</a></li>
+					<li><a href="javascript:goSort('city','扬州市')">扬州市</a></li>
+					<li><a href="javascript:goSort('city','扬州市')">镇江市</a></li>
+					<li><a href="javascript:goSort('city','扬州市')">泰州市</a></li>
+					<li><a href="javascript:goSort('city','扬州市')">宿迁市</a></li>
+					<li><a href="javascript:goSort('city','扬州市')">嘉兴市</a></li>
+					<li><a href="javascript:goSort('city','扬州市')">湖州市</a></li>
+					<li><a href="javascript:goSort('city','合肥市')">合肥市</a></li>
+					<li><a href="javascript:goSort('city','芜湖市')">芜湖市</a></li>
+					<li><a href="javascript:goSort('city','滁州市')">滁州市</a></li>
+					<li><a href="javascript:goSort('city','吉安市')">吉安市</a></li>
+					<li><a href="javascript:goSort('city','烟台市')">烟台市</a></li>
+					<li><a href="javascript:goSort('city','潍坊市')">潍坊市</a></li>
+					<li><a href="javascript:goSort('city','郑州市')">郑州市</a></li>
+					<li><a href="javascript:goSort('city','许昌市')">许昌市</a></li>
+					<li><a href="javascript:goSort('city','武汉市')">武汉市</a></li>
+					<li><a href="javascript:goSort('city','长沙市')">长沙市</a></li>
+					<li><a href="javascript:goSort('city','深圳市')">深圳市</a></li>
+					<li><a href="javascript:goSort('city','珠海市')">珠海市</a></li>
+					<li><a href="javascript:goSort('city','东莞市')">东莞市</a></li>
+					<li><a href="javascript:goSort('city','中山市')">中山市</a></li>
+					<li><a href="javascript:goSort('city','重庆市')">重庆市</a></li>
+					<li><a href="javascript:goSort('city','成都市')">成都市</a></li>		
+				</ul>
+			</div>
+			<div class="fac_filter_search">
+				<input type="text" placeholder="请输入企业、岗位关键字..." id="keyword" name="keyword" value=""><a href="javascript:goSort('keywords', $('#keyword').val());" class="btn btn_orange btn_b">搜　索</a>
+			</div>
+		</div>
+		<dl class="lists first" >
+			<dt class="titles">工资：</dt>
+			<dd id="sales">
+				<a href="javascript:goSort('asale',100)" class="eq_all active"  rel="nofollow"><span>不限</span></a><a class="" href="javascript:goSort('asale',3000)"><span>3000元以下</span></a><a href="javascript:goSort('asale',4000)" ><span>3000元-4000元</span></a><a href="javascript:goSort('asale',5000)" ><span>4000元-5000元</span></a><a href="javascript:goSort('asale',6000);" ><span>5000元-6000元</span></a><a href="javascript:goSort('asale',7000);"  ><span>6000元以上  </span></a>
+			</dd>
+		</dl>
+		<input type="hidden" id="asale" value="{$asale?$asale:'0'}">
+		<input type="hidden" id="recruitinfo" value="{$recruitinfo_id?$recruitinfo_id:'0'}">
+		<input type="hidden" id="tags" value="{$tag?$tag:'0'}">
+		<dl class="lists">
+			<dt class="titles">职位：</dt>
+			<dd id="recruitinfo_id">
+				<a href="javascript:goSort('recruitinfo_id','101')" class="eq_all active" rel="nofollow"><span>不限</span></a><a href="javascript:goSort('recruitinfo_id','储备干部')" ><span>储备干部</span></a><a href="javascript:goSort('recruitinfo_id', '长期工');" ><span>长期工</span></a><a href="javascript:goSort('recruitinfo_id', '小时工');" ><span>小时工</span></a><a href="javascript:goSort('recruitinfo_id', '安全乘务员');" ><span>安全乘务员</span></a><a href="javascript:goSort('recruitinfo_id', '派出所辅警');" ><span>派出所辅警</span></a><a href="javascript:goSort('recruitinfo_id', '普工');" ><span>普工</span></a><a href="javascript:goSort('recruitinfo_id', '客服');" ><span>客服</span></a><a href="javascript:goSort('recruitinfo_id', '司机');" ><span>司机</span></a><a href="javascript:goSort('recruitinfo_id', '技工');" ><span>技工</span></a><a href="javascript:goSort('recruitinfo_id', '销售');" ><span>销售</span></a><a href="javascript:goSort('recruitinfo_id', '其他');" ><span>其他</span></a>			</dd>
+		</dl>
+		<dl class="lists">
+			<dt class="titles">福利：</dt>
+			<dd id="tag">
+				<a href="javascript:goSort('tag', '102')" class="eq_all active" rel="nofollow"><span>不限</span></a><a href="javascript:goSort('tag', '名企');" ><span>名企</span></a><a href="javascript:goSort('tag', '工作轻松');" ><span>工作轻松</span></a><a href="javascript:goSort('tag', '不穿无尘服');" ><span>不穿无尘服</span></a><a href="javascript:goSort('tag', '年终奖');" ><span>年终奖</span></a><a href="javascript:goSort('tag', '多帅哥美女');" ><span>多帅哥美女</span></a><a href="javascript:goSort('tag', '坐着上班');" ><span>坐着上班</span></a><a href="javascript:goSort('tag', '夜班津贴');" ><span>夜班津贴</span></a><a href="javascript:goSort('tag', '包吃包住');" ><span>包吃包住</span></a><a href="javascript:goSort('tag', '空调宿舍');" ><span>空调宿舍</span></a><a href="javascript:goSort('tag', '吃住在厂');" ><span>吃住在厂</span></a><a href="javascript:goSort('tag', '加班多');" ><span>加班多</span></a><a href="javascript:goSort('tag', '绩效奖金');" ><span>绩效奖金</span></a><a href="javascript:goSort('tag', 'WIFI覆盖');" ><span>WIFI覆盖</span></a><a href="javascript:goSort('tag', '五险一金');" ><span>五险一金</span></a><a href="javascript:goSort('tag', '附近热闹');" ><span>附近热闹</span></a><a href="javascript:goSort('tag', '环境优美');" ><span>环境优美</span></a>			</dd>
+		</dl>
+	</div>
+	<div class="fac_main section clearfix">
+		<div class="s_l fac_list_main" id="data">
+			<div class="fac_list_tab">
+				<ul id="fac_list_tab">
+					<li class="active"><a href="javascript:goSort(6, '1,1');">默认排序</a></li>	
+				</ul>
+				<span class="nums" id="a_a">共为您找到<em>{$info.total}</em>条信息</span>
+			</div>
+			<ul class="fac_list">
+				{volist name="$data" id="vo"}
+				<li class="first" >
+						<a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank" class="imgs"><img src="{$vo.thumb|geturl}" alt="{$vo.title}" class="imgs"></a>
+						<div class="cons">
+							<div class="names">
+								<span class="prices"><em>{$vo.wagas}</em></span>
+								<h4><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank">{$vo.title}</a></h4>
+							</div>
+							<p class="des">
+								<a href="{:url('index/index/map',['id'=>$vo.id])}" class="to_map"><i class="ic ic_fac_lmap"></i>电子地图</a>
+								<span class="titles">招聘人数：</span>{$vo.peoples}            <span class="titles title2">企业规模：</span>{$vo.scales}<br>
+								<span class="titles">招聘岗位：</span><span class="tp">长期工</span><span class="tp">小时工</span><br>
+								<span class="titles">招聘要求：</span>{$vo.sex}<i class="line"></i>{$vo.age}										
+							</p>
+							<p class="fac_tag"><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank" class="to_fac btn btn_blue btn_m btn_round">查看</a><em>不穿无尘服</em><em>年终奖</em><em>空调宿舍</em></p>
+						</div>
+					</li>
+               {/volist}
+				</ul>
+				{$data->render()}
+				</div>
+		<div class="s_r">
+			<div class="fac_hot fac_rlist">
+	<h3 class="titles">
+		<i class="ic ic_fac_hottitle"></i>
+	</h3>
+	<ul class="fac_hot_list">
+		{volist name="$info.top" id="vo"}
+		<li class="text_hide"><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank">{$vo.name}  （{$vo.wagas}）</a></li>
+		{/volist}
+	</ul>
+		
+</div><!-- 热门招聘_20171020 -->
+			<div class="fac_rank fac_rlist">
+	<div class="ner_title"><i class="ic_line ic_ner_t"></i><h3>报名排行榜</h3></div>
+	<ul id="fac_rank">
+
+		{volist name="$info.right" id="vo" key="key" offset="0" length="1"}
+		<li class="tops"><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank" class="hover"><img src="{$vo.thumb|geturl}" alt="{$vo.title}"><div class="cons"><p><span class="eqs">{$key}</span>{$vo.name}</p><span class="nums">已报名<?php 
+                    echo rand(100,900);
+                    ?>人</span></div></a></li>
+		{/volist}
+
+		{volist name="$info.right" id="vo" key="key" offset="2" length="8"}
+		<li><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank"><img src="{$vo.thumb|geturl}" alt="{$vo.title}"><div class="cons"><p><span class="eqs">{$key}</span>{$vo.name}</p><span class="nums">已报名<?php 
+                    echo rand(100,900);
+                    ?>人</span></div></a></li>
+		{/volist}
+	</ul>
+</div><!-- 报名排行榜_20171020 -->
+			
+		</div>
+	</div>
+	<div class="fac_recom section">
+	<div class="fac_title"><i class="line"></i><h3>大家都想去</h3></div>
+	<ul class="fac_recom_list">
+		{volist name="$info.bottom" id="vo"}
+		<li>
+				<a href="{:url('index/index/infos',['id'=>$vo.id])}" class="imgs" target="_blank"><img src="{$vo.thumb|geturl}" alt="{$vo.name}"></a>
+				<div class="con">
+					<a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank" class="name">{$vo.name}</a>
+					<p class="des">{$vo.sex}</p>
+					<p class="price">￥{$vo.wagas}</p>
+				</div>
+			</li>
+         {/volist}
+		</ul>
+		}
+</div>	<!-- 选择附近的门店报名 c.k 20171025-->
+</div>
+
+</div>
+<script type="text/javascript" src="/static/public/js/footer.js"></script>
+
+<div id="div_active_lb_ad">
+	<a id="active_lb_hd_href" href="" target="_blank" data-val="http://www.gonglf.com" class="fixed_act_link zhongqiu_link">
+	<img id="active_lb_hd_img_src" src="" alt="" data-val="http://img.gonglf.com/">
+	</a>
+	<script type="text/javascript" src="js/glf_ad.js"></script>
+</div></body>
+<script type="text/javascript">
+$('.around ul li').click(function(){
+ let city=$(this).text();
+ $.ajax({
+        type:"get",
+        url:"{:url('index/work/city')}",
+        data:{city:city},
+        success:function(res){
+          if(res.code == 1) {
+            layer.msg(res.msg,{icon:6});
+             $('.city_v').text(res['city']);
+             // $('#data ul').hide();
+             window.location.load();
+          } else {
+            layer.msg(res.msg,{icon:2});
+          }
+        }
+      })
+});	
+</script>
+<script type="text/javascript">
+    function getQueryString(){
+     var result = location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+","g"));
+     if(result == null){
+         return "";
+     }
+     for(var i = 0; i < result.length; i++){
+         result[i] = result[i].substring(1);
+     }
+     return result;
+}
+function goSort(name,value){
+    var string_array = getQueryString();
+    var oldUrl = (document.URL.indexOf("loupan.html")==-1)?document.URL:document.URL;
+    var newUrl;
+    // alert(name)
+    // alert(value)
+    
+    if(string_array.length>0)//如果已经有筛选条件
+    {   
+        var repeatField = false;
+        for(var i=0;i<string_array.length;i++){
+            if(!(string_array[i].indexOf(name)==-1)){
+                repeatField = true;//如果有重复筛选条件，替换条件值
+                newUrl = oldUrl.replace(string_array[i],name+"="+value);
+            }
+        }
+        // 如果没有重复的筛选字段
+        if(repeatField == false){
+            newUrl = oldUrl+"&"+name+"="+value;
+        }
+    }
+    if(string_array.length==false)
+    {
+        newUrl = document.URL+"?"+name+"="+value;
+    }
+    // alert(newUrl)
+    //跳转
+    window.location = newUrl;
+}
+function setSelected(name,value){
+    var all_li = $("#"+name).find("li");
+    //清除所有li标签的selected类
+    all_li.each(function(){
+        $(this).removeClass("selected");
+    });
+    //为选中的li增加selected类
+    all_li.eq(value).addClass("selected");
+}
+$(document).ready(function(){
+    var string_array = getQueryString();
+    for(var i=0;i<string_array.length;i++){
+        var tempArr = string_array[i].split("=");
+        setSelected(tempArr[0],tempArr[1]);//设置选中的筛选条件
+    }
+//工资样式
+ var asale=$('#asale').val();
+if (asale) {
+	switch(asale){
+		case '3000':
+		$('#sales a').eq(1).addClass("active").siblings().removeClass("active");
+		break;
+		case '4000':
+		$('#sales a').eq(2).addClass("active").siblings().removeClass("active");
+		break;
+		case '5000':
+		$('#sales a').eq(3).addClass("active").siblings().removeClass("active");
+		break;
+		case '6000':
+		$('#sales a').eq(4).addClass("active").siblings().removeClass("active");
+		break;
+		case '7000':
+		$('#sales a').eq(5).addClass("active").siblings().removeClass("active");
+		break;
+	}
+}
+//职位样式
+ var recruitinfo=$('#recruitinfo').val();
+if (recruitinfo) {
+	switch(recruitinfo){
+		case '储备干部':
+		$('#recruitinfo_id a').eq(1).addClass("active").siblings().removeClass("active");
+		break;
+		case '长期工':
+		$('#recruitinfo_id a').eq(2).addClass("active").siblings().removeClass("active");
+		break;
+		case '小时工':
+		$('#recruitinfo_id a').eq(3).addClass("active").siblings().removeClass("active");
+		break;
+		case '安全乘务员':
+		$('#recruitinfo_id a').eq(4).addClass("active").siblings().removeClass("active");
+		break;
+		case '派出所辅警':
+		$('#recruitinfo_id a').eq(5).addClass("active").siblings().removeClass("active");
+		break;
+		case '普工':
+		$('#recruitinfo_id a').eq(6).addClass("active").siblings().removeClass("active");
+		break;
+		case '客服':
+		$('#recruitinfo_id a').eq(7).addClass("active").siblings().removeClass("active");
+		break;
+		case '司机':
+		$('#recruitinfo_id a').eq(8).addClass("active").siblings().removeClass("active");
+		break;
+		case '技工':
+		$('#recruitinfo_id a').eq(9).addClass("active").siblings().removeClass("active");
+		break;
+		case '销售':
+		$('#recruitinfo_id a').eq(10).addClass("active").siblings().removeClass("active");
+		break;
+		case '其他':
+		$('#recruitinfo_id a').eq(11).addClass("active").siblings().removeClass("active");
+		break;
+	}
+}
+//
+var tags=$('#tags').val();
+if (tags) {
+	switch(tags){
+		case '名企':
+		$('#tag a').eq(1).addClass("active").siblings().removeClass("active");
+		break;
+		case '工作轻松':
+		$('#tag a').eq(2).addClass("active").siblings().removeClass("active");
+		break;
+		case '不穿无尘服':
+		$('#tag a').eq(3).addClass("active").siblings().removeClass("active");
+		break;
+		case '年终奖':
+		$('#tag a').eq(4).addClass("active").siblings().removeClass("active");
+		break;
+		case '多帅哥美女':
+		$('#tag a').eq(5).addClass("active").siblings().removeClass("active");
+		break;
+		case '坐着上班':
+		$('#tag a').eq(6).addClass("active").siblings().removeClass("active");
+		break;
+		case '夜班津贴':
+		$('#tag a').eq(7).addClass("active").siblings().removeClass("active");
+		break;
+		case '包吃包住':
+		$('#tag a').eq(8).addClass("active").siblings().removeClass("active");
+		break;
+		case '空调宿舍':
+		$('#tag a').eq(9).addClass("active").siblings().removeClass("active");
+		break;
+		case '吃住在厂':
+		$('#tag a').eq(10).addClass("active").siblings().removeClass("active");
+		break;
+		case '加班多':
+		$('#tag a').eq(11).addClass("active").siblings().removeClass("active");
+		break;
+		case '绩效奖金':
+		$('#tag a').eq(12).addClass("active").siblings().removeClass("active");
+		break;
+		case 'WIFI覆盖':
+		$('#tag a').eq(13).addClass("active").siblings().removeClass("active");
+		break;
+		case '五险一金':
+		$('#tag a').eq(14).addClass("active").siblings().removeClass("active");
+		break;
+		case '附近热闹':
+		$('#tag a').eq(15).addClass("active").siblings().removeClass("active");
+		break;
+		case '环境优美':
+		$('#tag a').eq(16).addClass("active").siblings().removeClass("active");
+		break;
+	}
+}
+});
+//
+$('.nav li a').eq(0).removeClass("cur");
+$('.nav li a').eq(1).addClass("cur");
+</script>
+</html>

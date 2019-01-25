@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+<!-- 图片上传插件 -->
+<link rel="stylesheet" href="__CSS__/upload/common.css">
+<link rel="stylesheet" href="__CSS__/upload/style.css">
+<script type="text/javascript" src="__PUBLIC__/jquery/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="__PUBLIC__/area/distpicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/area/main.js"></script> -->
+<script type="text/javascript" src="__JS__/upload/plupload.full.min.js"></script>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li><a href="{:url('admin/recruit/index')}" class="a_menu">招聘信息</a></li>
+        <li class="layui-this">添加招聘信息</li>
+      </ul>
+    </div> 
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+      <div class="layui-form-item">
+        <label class="layui-form-label">工厂名称</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="name" lay-verify="name" autocomplete="off" placeholder="请输入名称" class="layui-input" type="text" {notempty name="$recruits.name"}value="{$recruits.name}"{/notempty}>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" type="text" {notempty name="$recruits.title"}value="{$recruits.title}"{/notempty}>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">分类</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <select name="recruitinfo_id" lay-filter="aihao">
+            <option value="">请选择分类</option>
+            {volist name="$cates" id="vo"}
+            <option value="{$vo.id}" {notempty name="$recruits.recruitinfo_id"}{eq name="$recruits.recruitinfo_id" value="$vo.id"} selected=""{/eq}{/notempty}>{$vo.str}{$vo.name}</option>
+            {/volist}
+          </select>
+        </div>
+      </div>
+      <!-- 选择地区 -->
+     <!--  <div class="layui-form-item" data-toggle="distpicker">
+        <label class="layui-form-label">选择地区</label>
+        <div class="layui-input-inline">
+         <select name="input_province" id="input_province"  >
+                    <option value="">--请选择--</option>
+                </select>
+        </div>
+        <div class="layui-input-inline">
+         <select name="input_city" id="input_city" >
+                    <option value=""></option>
+                </select>
+        </div>
+        <div class="layui-input-inline">
+        <select name="input_area" id="input_area" >
+                    <option value=""></option>
+                </select>
+        </div>
+      </div> -->
+      <div class="layui-form-item">
+        <label class="layui-form-label">选择地区</label>
+            <div class="layui-input-inline">
+        <select id="province" name="province" lay-filter="province" class="province">
+          <option {notempty name="$recruits.province"}{eq name="$recruits.province" value="$recruits.province"}{/eq}{/notempty}>{notempty name="$recruits.province"}{$recruits.province}{/notempty}</option>
+        </select>
+      </div>
+      <div class="layui-input-inline">
+        <select id="city" name="city" lay-filter="city" disabled>
+          <option {notempty name="$recruits.city"}{eq name="$recruits.city" value="$recruits.city"}{/eq}{/notempty}>{notempty name="$recruits.city"}{$recruits.city}{/notempty}</option>
+        </select>
+      </div>
+      <div class="layui-input-inline">
+        <select id="area" name="area" lay-filter="area" disabled>
+          <option {notempty name="$recruits.area"}{eq name="$recruits.area" value="$recruits.area"} {/eq}{/notempty}>{notempty name="$recruits.area"}{$recruits.area}{/notempty}</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">工厂详细地址</label>
+        <div class="layui-input-inline">
+          <input name="zparea" lay-verify="area" autocomplete="off" placeholder="工厂详细地址" class="layui-input" type="text" {notempty name="$recruits.area"}value="{$recruits.zparea}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:犀浦XX号</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">乘车路线</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="busline" lay-verify="busline" autocomplete="off" placeholder="请输入乘车路线" class="layui-input" type="text" {notempty name="$recruits.busline"}value="{$recruits.busline}"{/notempty}>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">接站地址</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="address" lay-verify="address" autocomplete="off" placeholder="请输入接站地址" class="layui-input" type="text" {notempty name="$recruits.address"}value="{$recruits.address}"{/notempty}>
+        </div>
+      </div>
+       <div class="layui-form-item">
+        <label class="layui-form-label">综合薪资</label>
+        <div class="layui-input-inline">
+          <input name="wagas" lay-verify="wagas" autocomplete="off" placeholder="请输入工资" class="layui-input" type="text" {notempty name="$recruits.wagas"}value="{$recruits.wagas}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:4000-5000/月</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">平均薪资</label>
+        <div class="layui-input-inline">
+          <input name="asale" lay-verify="asale" autocomplete="off" placeholder="请输入平均薪资" class="layui-input" type="text" {notempty name="$recruits.asale"}value="{$recruits.asale}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:5000</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">小时工</label>
+        <div class="layui-input-inline">
+          <input name="timepay" lay-verify="timepay" autocomplete="off"  class="layui-input" type="text" placeholder="请输入小时薪资"{notempty name="$recruits.timepay"}value="{$recruits.timepay}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:22/小时</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">标签</label>
+        <div class="layui-input-inline" >
+          <input name="tag" autocomplete="off" placeholder="标签之间用,隔开" class="layui-input" type="text" {notempty name="$recruits.tag"}value="{$recruits.tag}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:名企,工作轻松,环境优美</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">人数</label>
+        <div class="layui-input-inline">
+          <input name="peoples" lay-verify="peoples" autocomplete="off" placeholder="请输入人数" class="layui-input" type="text" {notempty name="$recruits.peoples"}value="{$recruits.peoples}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:1200</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">学历</label>
+        <div class="layui-input-inline">
+          <input name="education" lay-verify="education" autocomplete="off" placeholder="请输入学历" class="layui-input" type="text" {notempty name="$recruits.education"}value="{$recruits.education}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:初中学历</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">限制性别</label>
+        <div class="layui-input-inline">
+          <input name="sex" lay-verify="sex" autocomplete="off" placeholder="请输入性别" class="layui-input" type="text" {notempty name="$recruits.sex"}value="{$recruits.sex}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:男、女、男女不限</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">限制年龄</label>
+        <div class="layui-input-inline">
+          <input name="age" lay-verify="age" autocomplete="off" placeholder="请输入年龄" class="layui-input" type="text" {notempty name="$recruits.age"}value="{$recruits.age}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:16-45岁</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">电话</label>
+        <div class="layui-input-inline">
+          <input name="tel" id="tel" onblur="checkphone()" lay-verify="tel" autocomplete="off" placeholder="请输入电话号码" class="layui-input" type="text" {notempty name="$recruits.tel"}value="{$recruits.tel}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:132XXXXXXXX</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">企业规模</label>
+        <div class="layui-input-inline">
+          <input name="scales" lay-verify="scales" autocomplete="off" placeholder="请输入企业规模" class="layui-input" type="text" {notempty name="$recruits.scales"}value="{$recruits.scales}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:6万人</div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">所属行业</label>
+        <div class="layui-input-inline">
+          <input name="trade" lay-verify="trade" autocomplete="off" placeholder="请输入所属行业" class="layui-input" type="text" {notempty name="$recruits.trade"}value="{$recruits.trade}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">例如:制造业</div>
+      </div>
+      <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <textarea placeholder="请输入工厂详细介绍" class="layui-textarea" name="description">{notempty name="$recruits.description"}{$recruits.description}{/notempty}</textarea>
+        </div>
+      </div>
+      <div class="layui-upload" id="upload-thumb">
+        <label class="layui-form-label">缩略图</label>
+        <button type="button" class="layui-btn" id="thumb">上传图片</button>
+        <div class="layui-upload-list">
+          <label class="layui-form-label"></label>
+          <img class="layui-upload-img" id="demo1" width="150" height="150" {notempty name="$recruits.thumb"}src="{$recruits.thumb|geturl}"{/notempty}>{notempty name="$recruits.thumb"}<input type="hidden" id="thumba" name="thumb" value="{$recruits.thumb}">{/notempty}
+          <p id="demoText"></p>
+        </div>
+      </div>
+      <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">内容</label>
+        <div class="layui-input-block" style="max-width:1000px;">
+          <textarea placeholder="请输入内容" class="layui-textarea" name="content" id="container" style="border:0;padding:0">
+            {empty name="$recruits"}
+<div class="fac_main_info">
+<div class="fac_salary">
+<div class="fac_title"><em class="lines"></em><i class="ic ic_fac_t1"></i><h3>工资情况</h3></div>
+<h3 class="title2"><i class="line"></i>我能挣多少钱？</h3>
+<table width="100%" cellpadding="10">
+<tbody>
+<tr class="t1 first">
+<th><i class="ic ic_gz_zh"></i>综合工资</th>
+<td><span class="prices">￥4500-6000 元/月</span></td>
+</tr>
+<tr class="t1">
+<th><i class="ic ic_gz_xs"></i>小时工</th>
+<td><span class="prices">22元/小时</span><span class="notes"></span><span class="fr">月工资：<em class="prices">4500-6000元</em></span></td>
+</tr>
+
+<tr class="t1">
+<th><i class="ic ic_gz_ff"></i>发放时间</th>
+<td>每月20日准时打入工资卡。</td>
+</tr>                       </tbody>
+</table>
+</div>
+<div class="fac_des">
+<div class="fac_title"><em class="lines"></em><i class="ic ic_fac_t2"></i><h3>岗位介绍</h3></div>
+<dl>
+<dt><h3 class="title2"><i class="line"></i>需要什么条件？</h3></dt>
+<dd>
+1、16-45岁，男女不限；<br />
+2、手背上有纹身、不夸张性小纹身烟疤也可以，体重不超过190斤，男生头发颜色不能太夸张；<br />
+3、认识26个英文字母；<br />
+4、自离或正常离职满1个月可以再进厂； <br />
+5、有效二代身份证原件（身份证无磁及临时身份证均可）及身份证复印件2张，一寸照片2张，黑色水笔1支。                      </dd>
+
+<dt><h3 class="title2"><i class="line"></i>上班情况？</h3></dt>
+<dd>工作内容：<br/>主要生产车载耳机，音响，电话手表。<br/>工作时间：<br/>两班制（半个月倒班一次），早班7:00-19:00，晚班19:00-7:00。<br/>工作方式：<br/>1、两班制（半个月倒班一次），早班7:00-19:00，晚班19:00-7:00；<br />
+2、工作方式坐站都有，不穿无尘服。<br/></dd>
+<dt><h3 class="title2"><i class="line"></i>吃住咋样？</h3></dt>
+<dd>
+伙食情况：<br/>伙食为自己充卡吃饭。<br/>宿舍情况：<br/>厂内免费住宿，宿舍有独立洗手间，公共卫浴设施。<br/>工厂情况：<br/>1、厂区环境优美，厂内设有餐厅、篮球场等等生活娱乐设施。<br />
+2、厂区周边分布有佳境天城、北海公寓等，房子距离厂区很近，骑电动车5-8分钟，一般十几平米的房子租金在300-500元/月左右。<br/>                                                           </dd>
+<dt><h3 class="title2"><i class="line"></i>有啥福利？</h3></dt>
+<dd>
+社会保险：<br/>不扣社保。<br/>                                                            </dd>
+</dl>
+<div class="fac_des_note">
+<span class="titles"><i class="ic ic_fac_desnote"></i>温馨提示：</span>
+<p><p class="vals">1、进厂面试请注意排队；</p><p class="vals">
+2、培训的时候不能穿拖鞋；</p><p class="vals">
+3、可提前申请安排到同一厂区；</p><p class="vals">
+4、员工面试时间为8:00- 17:00。</p></p>
+</div>
+</div>
+</div>
+       {else /}
+          {notempty name="$recruits.content"}{$recruits.content}{/notempty}
+       {/empty}
+          
+          </textarea>
+        </div>
+      </div>
+       <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">手机内容</label>
+        <div class="layui-input-block" style="max-width:1000px;">
+          <textarea placeholder="请输入内容" class="layui-textarea" name="mcontent" id="mcontainer" style="border:0;padding:0">
+      {empty name="$recruits"}
+      <h2 class="f_title scroll_title" data-stp="1" id="stp1"><span class="ic_line ic_line_l"></span><i class="icon2 icon2-xinzifuli"></i>工资情况<span class="ic_line ic_line_r"></span></h2>
+
+<div class="page_hcon page_hinfo">
+<div class="h_title">
+<h2><i class="ic_line"></i>我能挣多少钱？</h2>
+</div>
+<dl class="price_table">
+<dt>综合工资：</dt>
+<dd><em>4500-5500元/月</em></dd>
+
+<dt>底薪描述：</dt>
+<dd>底薪2020元/月。</dd>           <dt>加&nbsp;&nbsp;班&nbsp;&nbsp;费：</dt>
+<dd>加班翻倍。</dd>                                                                                      
+<dt>发放时间：</dt>
+<dd>每月8号准时打入工资卡。</dd>       </dl>
+</div>
+
+<h2 class="f_title scroll_title" data-stp="2" id="stp2"><span class="ic_line ic_line_l"></span><i class="icon2 icon2-gangweijieshao"></i>岗位介绍<span class="ic_line ic_line_r"></span></h2>
+<div class="page_hcon page_hinfo">
+<div class="h_title">
+<h2><i class="ic_line"></i>需要什么条件？</h2>
+</div>
+<ol>
+<li><span class="nums">1、</span>18-40周岁，男女不限；</li><li><span class="nums">2、</span>认识26个英文字母；</li><li><span class="nums">3、</span>身体健康，无纹身烟疤，体内不能有金属物质，手指灵活 （ 手指残缺、有明显伤疤需要提前确认，不脱上衣检查）；</li><li><span class="nums">4、</span>男女身高不得低于145cm，轻微色弱可以进厂；</li><li><span class="nums">5、</span>自离或者正常辞职满48个工作日，才能再进工厂；</li>       </ol>
+</div>
+
+<div class="page_hcon page_hinfo">
+<div class="h_title">
+<h2><i class="ic_line"></i>上班情况？</h2>
+</div>
+<dl>
+<dt>工作内容：</dt>
+<dd>1、主要生产手机电脑、组装、包装等；
+2、工作环境良好，恒温、恒湿无尘车间。</dd>          <dt>工作时间：</dt>
+<dd>两班倒，根据车间不同上班时间不同，一个月倒一次班。</dd>          <dt>工作方式：</dt>
+<dd>工作方式以坐着上班为主，工作需穿静电服。</dd>       </dl>
+</div>      
+<div class="page_hcon page_hinfo">
+<div class="h_title">
+<h2><i class="ic_line"></i>吃住咋样？</h2>
+</div>
+<dl>
+<dt>伙食情况：</dt>
+<dd>公司为大家提供餐费补助280元/月。</dd>           <dt>住宿情况：</dt>
+<dd>1、目前有三个住宿区域；
+2、宿舍8人间（住宿30元/月），宿舍有空调、洗衣机、无线网、标准八人间、独立卫生间、独立卫浴，住宿环境干净舒适；
+3、去厂里可以走路也可以做厂车，走路20分钟到厂，坐厂车5-8分钟左右到厂。</dd>           <dt>工厂环境：</dt>
+<dd>1、员工生活区内设有医务室、中国移动、水果店、超市、小吃街、图书馆、网吧等社会配套服务机构；公司内部有足球、篮球场等；
+</dd>                     </dl>
+</div>      
+
+<div class="page_hcon page_hinfo">
+<div class="h_title">
+<h2><i class="ic_line"></i>有啥福利？</h2>
+</div>
+<dl>
+<dt>福利待遇：</dt>
+<dd>1、优秀员工旅游：每月表现优秀的员工，会有机会被安排至上海/苏州/无锡/杭州/周庄等旅游景点免费旅游一次；<br />
+2、班组长培训：每月会从在职产线员工中选拔表现优异者参加培训，作为基层主管的储备； <br />
+3、年终奖金：这个根据个人年度绩效情况，在年末时会发放不同金额的年终奖金； <br />
+4、年度优秀员工：公司每年度都会评选全公司优秀员工，并发放给每名1000元的激励奖金及奖牌。</dd>           <dt>社会保险：</dt>
+<dd>交社保212元/月。</dd>           <dt>休息节日：</dt>
+<dd>正常是一个月休息4天。</dd>          </dl>
+</div>      
+<div class="page_hcon page_hinfo">
+<div class="h_title">
+<h2><i class="ic_line"></i>温馨提示</h2>
+</div>
+<dl class="note_table">
+<dd><li><span class="nums">1、</span>进厂需要带上有效二代身份证原件及身份证复印件5张，毕业证复印件2张，一寸或者二寸照片3张，黑色水笔1支；
+</li><li><span class="nums">2、</span>报道迟到的最低一星期以后可以再去，报道后分到产线迟到的最低一个月以后可以再进；
+</li><li><span class="nums">3、</span>自离或者正常辞职满48个工作日，就能再进工厂工作；
+</li><li><span class="nums">4、</span>有夫妻想在一个车间上班的，可以找驻厂老师报备。</li></dd>
+</dl>
+</div>
+       {else /}
+          {notempty name="$recruits.mcontent"}{$recruits.mcontent}{/notempty}
+       {/empty}
+          
+          </textarea>
+        </div>
+      </div>
+      <div class="layui-form-item layui-form-text">
+       <!--  <label class="layui-form-label">工厂图片</label> --> 
+       <label class="layui-form-label">多图片上传</label>
+       <div class="container">
+
+      <div class="demo">
+        <a class="btn" id="btn">上传图片</a> 最大500KB，支持jpg，gif，png格式。
+        <ul id="ul_pics" class="ul_pics clearfix">
+      {empty name="$pictures"}
+       {else /}
+         {volist name="$pictures" id="vo"}
+         <li>
+           <div class="img">
+             <img src="{$vo}">
+             <p>{$vo}</p>
+           </div>
+         </li>
+         {/volist}
+       {/empty}
+        </ul>
+      </div>
+      <input type="hidden" name="pictures" id="pictures" value="">
+    </div>
+      </div>
+
+      {notempty name="$recruits"}
+      <input type="hidden" name="id" value="{$recruits.id}">
+      {/notempty}
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <!-- <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script> -->
+    <script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#thumb' //绑定元素
+        ,url: "{:url('common/upload')}" //上传接口
+        ,data:{use:'article_thumb'}
+        ,done: function(res){
+          //上传完毕回调
+          if(res.code == 2) {
+            $('#demo1').attr('src',res.src);
+            $('#upload-thumb').append('<input type="hidden" name="thumb" value="'+ res.id +'">');
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+        ,error: function(){
+          //请求异常回调
+          //演示失败状态，并实现重传
+          var demoText = $('#demoText');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function(){
+            uploadInst.upload();
+          });
+        }
+      });
+    });
+    </script>
+
+<script type="text/javascript">
+    layui.config({
+      base : "__PUBLIC__/area/" //address.js的路径
+    }).use(["address"], function() {
+      var address = layui.address();
+ 
+    });
+  </script>
+
+    <script>
+
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+             var pictures=new Array();
+             $('#ul_pics li').find('p').each(function(){
+              var aab=$(this).text();
+              if(aab){
+              aab=aab.replace(/\/static\/uploadajax\//, "");
+              };
+              pictures.push('/static/uploadajax/'+aab);
+              });
+              $('#pictures').val(pictures);
+              //地区选择修改name为vlaue
+             let ab_p=$('#province option:selected').text();
+             $('#province option:selected').val(ab_p);
+             let ab_c=$('#city option:selected').text();
+             $('#city option:selected').val(ab_c);
+             let ab_a=$('#area option:selected').text();
+             $('#area option:selected').val(ab_a);
+                  $.ajax({
+                      url:"{:url('admin/recruit/publish')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+      function checkphone()  
+    {  
+        var tel= document.getElementById("tel").value;
+        var re1=/^1[3|4|5|6|7|8|9][0-9]\d{8}$/;
+        if(!(re1.test(tel))){
+          //document.getElementById("tel").focus();
+          alert("电话号码不正确");
+           return false;
+        };
+    }
+    </script>
+
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+     <script id="mcontainer" name="mcontent" type="text/plain">
+        这里写你的初始化内容手机
+    </script>
+    <!-- <script id="containers" name="pictures" type="text/plain">
+        这里写你的初始化内容
+    </script> -->
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
+     <script type="text/javascript">
+        var ue = UE.getEditor('mcontainer');
+    </script> 
+    <script type="text/javascript">
+      var uploader = new plupload.Uploader({ //创建实例的构造方法
+        runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+        browse_button: 'btn', // 上传按钮
+        url: "uploadajax", //远程上传地址
+        //flash_swf_url: 'plupload/Moxie.swf', //flash文件地址
+        //silverlight_xap_url: 'plupload/Moxie.xap', //silverlight文件地址
+        filters: {
+          max_file_size: '500kb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+          mime_types: [ //允许文件上传类型
+            {
+              title: "files",
+              extensions: "jpg,png,gif,ico"
+            }
+          ]
+        },
+        multi_selection: true, //true:ctrl多文件上传, false 单文件上传
+        init: {
+          FilesAdded: function(up, files) { //文件上传前
+            if ($("#ul_pics").children("li").length > 30) {
+              alert("您上传的图片太多了！");
+              uploader.destroy();
+            } else {
+              var li = '';
+              plupload.each(files, function(file) { //遍历文件
+                li += "<li id='" + file['id'] + "'><div class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+              });
+              $("#ul_pics").append(li);
+              uploader.start();
+            }
+          },
+          UploadProgress: function(up, file) { //上传中，显示进度条
+            var percent = file.percent;
+            $("#" + file.id).find('.bar').css({
+              "width": percent + "%"
+            });
+            $("#" + file.id).find(".percent").text(percent + "%");
+          },
+          FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+            var data = eval("(" + info.response + ")");
+            $("#" + file.id).html("<div class='img'><img src='" + data.pic + "'/></div><p>" + data.name + "</p>");
+          },
+          Error: function(up, err) { //上传出错的时候触发
+            alert(err.message);
+          }
+        }
+      });
+      uploader.init();
+    </script>
+  </div>
+</body>
+<!-- 三级联动js -->
+<script type="text/javascript" src="/static/public/area/address.js"></script>
+</html>

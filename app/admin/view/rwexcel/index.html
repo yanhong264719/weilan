@@ -1,0 +1,97 @@
+<blockquote class="layui-elem-quote layui-text">
+  操作流程：
+  1.填写要下载的条数
+  2.按照时间筛选数据
+</blockquote>
+              
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>筛选数据</legend>
+</fieldset>
+ 
+<form class="layui-form" id="demo" action="{:url('admin/rwexcel/daochu')}" method="post">
+  
+    <div class="layui-form-item">
+    <label class="layui-form-label">数据量</label>
+    <div class="layui-input-inline">
+      <input type="text" name="number" required  lay-verify="required" placeholder="请输入数据条数" autocomplete="off" class="layui-input" style="width: 200px" value="0">
+    </div>
+    <div class="layui-form-mid layui-word-aux" style="margin-left:5px">下载全部数据,请填写0</div>
+  </div>
+<!-- 定时发布时间 -->
+<div class="layui-form-item" >
+<label class="layui-form-label">选择时间</label>
+<div class="layui-input-inline"> <!-- 注意：这一层元素并不是必须的 -->
+  <input type="text" class="layui-input" id="timeout" name="timeout" style="width: 200px">
+</div>
+<div class="layui-form-mid layui-word-aux" style="margin-left:5px">下载全部数据,请清空时间</div>
+</div>
+<div class="layui-form-item" style="margin-left: 30px">
+      <button class="layui-btn" lay-submit lay-filter="formDemo" id="oktime">开始下载</button>
+  </div>  
+</form>
+     
+<script src="/static/public/layui/lay/modules/jquery.js" charset="utf-8"></script>
+<script src="/static/public/layui/lay/modules/layer.js" charset="utf-8"></script>
+<script src="/static/public/layui/lay/modules/form.js" charset="utf-8"></script>
+
+    <!-- 三级联动js -->
+<!-- <script type="text/javascript" src="/static/public/article/article.js"></script> -->
+<!-- <script type="text/javascript" src="/static/public/article/articlecate.json"></script> -->
+<!-- <script type="text/javascript">
+    layui.config({
+      base : "__PUBLIC__/article/" //address.js的路径
+    }).use(["address"], function() {
+      var address = layui.address();
+ 
+    });
+  </script> -->
+  <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+              form.on('submit(formDemo)', function(data){
+              // $('#oktime').html('三秒后跳转');
+              setTimeout(function(){
+              location.reload();
+              },500);
+            });
+             //  $('#admin').click(function(data) {
+             // let ab_p=$('#province option:selected').text();
+             // $('#province option:selected').val(ab_p);
+             // let ab_c=$('#city option:selected').text();
+             // $('#city option:selected').val(ab_c);
+             // let ab_a=$('#area option:selected').text();
+             // $('#area option:selected').val(ab_a);
+             //      $.ajax({
+             //          url:"{:url('admin/publish/timefabus')}",
+             //          data:$('#demo').serialize(),
+             //          type:'post',
+             //          async: false,
+             //          success:function(res) {
+             //              if(res.code == 1) {
+             //                  layer.alert(res.msg, function(index){
+             //                     window.location.reload();
+             //                  })
+             //              } else {
+             //                  layer.msg(res.msg);
+             //              }
+             //          }
+             //      })
+             //      return false;
+             //  });
+         
+      });
+    </script>
+    <script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#timeout' //指定元素
+    ,range: '~' //或 range: '~' 来自定义分割字符
+    ,type:'datetime'
+  });
+});
+</script>

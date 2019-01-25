@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+		<title>{$keywords.name}</title>
+<meta name="keywords" content="{$keywords.keywords}">
+<meta name="description" content="{$keywords.desc}">
+<meta name="x5-fullscreen" content="true">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content=" initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no" />
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+
+
+<link rel="stylesheet" href="__STATIC__/input/css/sm.css">
+<link rel="stylesheet" href="__STATIC__/input/css/sm-extend.min.css">
+<link rel="stylesheet" href="__STATIC__/input/css/home.css">
+<script type="text/javascript" src="/static/public/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/static/public/layui/layui.all.js"></script>
+	
+	
+</head>
+<body>
+
+<div class="page page_a" id="page_ask_tiwen" >
+	<header class="bar bar-nav bar_index">
+        <a class="back pull-left"><span class="icon icon-left"></span></a>
+        <h1 class="title">{$data.name}</h1>
+    </header>
+	<div class="content page_aform">
+		<div class="forms">
+			<textarea name="question" id="question" placeholder="请描述您的问题~"></textarea>
+			<p class="txt_lost"><em>0</em>/<font>50</font></p>	
+		</div>
+		<a class="button button-fill button-big btn_submit" href="javascript:void(0)" onclick="message()">提交</a>
+	</div>
+</div>
+
+
+<script src="__STATIC__/input/js/zepto.js"></script>
+<script src="__STATIC__/input/js/sm.min.js"></script>
+
+
+
+
+</body>
+</html>
+<script type="text/javascript">
+function message(){
+	var value=$('#question').val();
+	$.ajax({
+    type : 'post',
+    url  : '/index/index/mess',
+    data : {'message':value,'recruit_id':{$data.id},'types':'mobile'},
+    dataType:'json',
+    success : function(res){
+        if(res.code == 1){
+           layer.msg(res.msg,{icon: 6});
+            setTimeout(window.location.href="{:url('index',['id'=>$data.id])}",3000);
+        }
+        if(res.code == 0){
+         layer.msg(res.msg,{icon: 2});
+        }
+    }
+  });
+};
+</script> 
+<!-- home模板文件 -->

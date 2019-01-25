@@ -1,0 +1,410 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    
+    <title>{$recruits.name}</title>
+    <meta name="keywords" content="{$recruits.title}" />
+    <meta name="description" content="{$recruits.description}" />
+
+    <link href="/static/info/css/style-main.css" rel="stylesheet" />
+    <link href="/static/info/css/style-fac.css" rel="stylesheet" />
+    <!--[if lt IE 8]>
+        <script type="text/javascript">
+            var iealert_img_url = "/Public/Home/v/images";
+        </script>
+        <script src="/static/info/js/iealert.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            DomReady.ready(iealert);
+        </script>
+    <![endif]-->
+    <script src="/static/info/js/jquery.js"></script>
+    <script src="/static/info/js/layer.js" merge="true"></script>
+    <script src="/static/info/js/main.js"></script>
+    <script src="/static/info/js/fac.js"></script>
+    <script type="text/javascript">
+        var site_url = '';
+    </script>
+    <script src="/static/info/js/ckbrowser.js" type="text/javascript"></script><!-- 判断客户端并对文章进行跳转 -->
+    
+</head>
+<body>
+<script type="text/javascript" src="/static/public/js/navbar.js"></script>
+<div class="breadcrumb">
+    <ul class="section">
+        <li>您现在的位置：</li>
+        <li><a href="/">首页</a> <span class="divider">></span></li>
+        <li><a href="{:url('index/work/work')}">找工作</a> <span class="divider">></span></li>
+        <li class="active">{$recruits.name}</li>
+    </ul>
+</div>
+
+<form action="" class="form form-horizontal" id="signup">
+            <input type="hidden" name="type" value="1" /><!-- 入口类型 -->
+            <input type="hidden" name="type_id" value="10089" /><!-- 公司ID -->
+            <input type="hidden" name="type_name" value="山东歌尔声学" /><!-- 公司名称 -->
+            <div class="form-item">
+                <label class="form-label" for="">意向企业：</label>
+                <div class="form-field form-field_txt"><input type="hidden" name="comp_old" value="山东歌尔声学" class="reg_input" disabled style="width:200px">山东歌尔声学</div>
+            </div>
+                            <div class="form-item">
+                    <label class="form-label" for="">姓名：</label>
+                    <div class="form-field"><input type="text" placeholder="请输入您的姓名" class="form-text" name="user_name"></div>
+                </div>
+                <div class="form-item">
+                    <label class="form-label" for="">电话：</label>
+                    <div class="form-field"><input type="text" placeholder="请输入您的联系电话" class="form-text" name="mobile" id="inputMobile"></div>
+                </div>
+                <div class="form-item form-item_imark">
+                    <label class="form-label" for="">验证码：</label>
+                    <div class="form-field"><input type="text" placeholder="请输入验证码" class="form-text" name="verify" id="inputVerify"><img src="/static/info/picture/signupsms_.html"  onclick="this.src=this.src"></div>
+                </div>
+                <div class="form-item form-item_nmark">
+                    <label class="form-label" for="">短信验证码：</label>
+                    <div class="form-field"><input type="text" placeholder="输入验证码" class="form-text" name="code"><a href="javascript:getCode();" id="reg_getCode" class="btn btn_orange">获取验证码</a></div>
+                </div>          <div class="form-item form-item_address">
+                <label class="form-label" for="">我现在在哪：</label>
+                <div class="form-field">
+                    <select name="lo_p" class="form-select inline-ele region">
+                        <option value="">请选择</option>
+                            <option value="110000" data-id="北京">北京</option><option value="120000" data-id="天津">天津</option><option value="130000" data-id="河北省">河北省</option><option value="140000" data-id="山西省">山西省</option><option value="150000" data-id="内蒙古自治区">内蒙古自治区</option><option value="210000" data-id="辽宁省">辽宁省</option><option value="220000" data-id="吉林省">吉林省</option><option value="230000" data-id="黑龙江省">黑龙江省</option><option value="310000" data-id="上海">上海</option><option value="320000" data-id="江苏省">江苏省</option><option value="330000" data-id="浙江省">浙江省</option><option value="340000" data-id="安徽省">安徽省</option><option value="350000" data-id="福建省">福建省</option><option value="360000" data-id="江西省">江西省</option><option value="370000" data-id="山东省">山东省</option><option value="410000" data-id="河南省">河南省</option><option value="420000" data-id="湖北省">湖北省</option><option value="430000" data-id="湖南省">湖南省</option><option value="440000" data-id="广东省">广东省</option><option value="450000" data-id="广西">广西</option><option value="460000" data-id="海南省">海南省</option><option value="500000" data-id="重庆">重庆</option><option value="510000" data-id="四川省">四川省</option><option value="520000" data-id="贵州省">贵州省</option><option value="530000" data-id="云南省">云南省</option><option value="540000" data-id="西藏自治区">西藏自治区</option><option value="610000" data-id="陕西省">陕西省</option><option value="620000" data-id="甘肃省">甘肃省</option><option value="630000" data-id="青海省">青海省</option><option value="640000" data-id="宁夏回族自治区">宁夏回族自治区</option><option value="650000" data-id="新疆维吾尔自治区">新疆维吾尔自治区</option><option value="710000" data-id="台湾">台湾</option><option value="810000" data-id="香港特别行政区">香港特别行政区</option><option value="820000" data-id="澳门特别行政区">澳门特别行政区</option>                    </select>
+                    <select name="lo_c" class="form-select inline-ele region">
+                        <option value="" selected disabled>请选择</option>
+                    </select>
+                    <select name="lo_a" class="form-select inline-ele region">
+                        <option value="" selected disabled>请选择</option>
+                    </select>
+                    <select name="lo_s" style="display: none;" id="baoming_select_store" class="hj_select">
+                        <option value="" selected disabled>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-item">
+                <a href="javascript:signup()" class="btn btn_b btn_orange">确定</a>
+            </div>
+        </form>
+
+<script src="/static/info/js/superslide.js"></script>
+<script type="text/javascript">
+$("#changeMobile").click(function(){
+    $(".telText").hide();
+    $("#inputMobile").show();
+});
+
+//收藏
+var collect_func = function(){
+    var th = $("#collect");
+    var type_id = th.attr('data-id');
+    console.log(th);
+    console.log(type_id);
+
+    var loadA = layer.load(2);  //弹出加载框
+    $.post("/Public/collect.html", {type_id:type_id, type:1}, function(data){
+        layer.close(loadA);
+        if(data.status == 1){
+            var title = '';
+            var text = '';
+            if(data.data == 1){
+                title = '取消收藏';
+                th.addClass('hover');
+            }else{
+                title = '收藏';
+                th.removeClass('hover');
+            }
+            th.attr('title', title);
+            th.html('<i class="ic ic_fac_collect"></i><i class="ic ich ic_fac_collect_hover"></i>'+title);
+        }else if(data.status == -1){
+            layer.confirm('请先登录后再收藏，立即登录？', {title:'温馨提示', btn:['立即登录', '稍后再说']}, function(rs){
+                layer.close(rs);
+                location.href = "/Login/index.html";
+            });
+        }else{
+            layer.alert(data.msg, {title:'温馨提示'});
+        }
+    }, 'json');
+}
+
+/* $("#collect").click(function(){
+    var th = $(this);
+    var type_id = $(this).attr('data-id');
+    console.log(th);
+    console.log(type_id);
+
+    var loadA = layer.load(2);  //弹出加载框
+    $.post("/Public/collect.html", {type_id:type_id, type:1}, function(data){
+        layer.close(loadA);
+        if(data.status == 1){
+            var title = '';
+            var text = '';
+            if(data.data == 1){
+                title = '取消收藏';
+                text = '&#xe622;';
+            }else{
+                title = '点击收藏';
+                text = '&#xe608;';
+            }
+            th.attr('title', title);
+            th.find("i").html(text);
+            var collect_object = $('#collect_div');
+            if(collect_object.hasClass('active')){
+                collect_object.removeClass('active');
+            }else{
+                collect_object.addClass('active');
+            }
+
+        }else if(data.status == -1){
+            layer.confirm('请先登录后再收藏，立即登录？', {title:'温馨提示', btn:['立即登录', '稍后再说']}, function(rs){
+                layer.close(rs);
+                location.href = "/Login/index.html";
+            });
+        }else{
+            layer.alert(data.msg, {title:'温馨提示'});
+        }
+    }, 'json');
+}); */
+
+//检测会员信息是否完善
+function checkUserInfo(){
+        $("#bmBtn").click();
+}
+//会员报名
+function signup(){
+    var loadA = layer.load(2);  //弹出加载框
+    $.ajax({
+        type    : 'POST',   //请求方式
+        url     : "/Public/baoming.html",       //请求连接
+        dataType: 'json',   //返回json数据
+        data    : $("#signup").serialize(), //请求数据
+        success : function(data){
+            layer.close(loadA);
+            if(data.status == 1){
+                /* $(".close-reveal-modal").click();
+                $("#tip_msg").html('恭喜您，报名成功！<br/>请保持手机畅通，我们会尽快与您联系~');//text('恭喜您，报名成功！');
+                $("#bmcg-btn").click(); */
+                $("#signup")[0].reset();
+                var nums = parseInt($('#baoming_nums1').text()) + 1;
+
+                $('#baoming_nums1,#baoming_nums2').text(nums);
+                layer.alert('恭喜您，报名成功！<br/>请保持手机畅通，我们会尽快与您联系~', {title:'温馨提示'}, function(index){
+                    layer.closeAll();
+                });
+            }else{
+                layer.alert(data.msg, {title:'温馨提示'}, function(index){
+                    if(data.ret_url){
+                        location.href = data.ret_url;
+                        layer.closeAll();
+                    }else{
+                        layer.close(index);
+                    }
+                });
+            }
+        }
+    });
+};
+function message(){
+layer.prompt({
+  formType: 2,
+  value: '请留下您的联系方式,我们会第一时间回复你！',
+  title: '请输入留言信息',
+  maxlength: 150,
+  btnAlign: 'c', //按钮居中
+}, 
+ function(value,index){
+ if (value){
+$.ajax({
+    type : 'post',
+    url  : '/index/index/mess',
+    data : {'message':value,'recruit_id':{$recruits.id}},
+    dataType:'json',
+    success : function(res){
+        if(res.code == 1){
+           layer.msg(res.msg,{icon: 6}); 
+        }
+        if(res.code == 0){
+         layer.msg(res.msg,{icon: 2});
+        }
+    }
+  });
+ }else{
+      layer.msg('不能为空',{icon: 6});
+ }
+  //layer.close(index);
+}
+)};
+//推荐
+function recommend(){
+    var loadA = layer.load(2);  //弹出加载框
+    $.ajax({
+        type    : 'POST',   //请求方式
+        url     : "/Public/recommend.html", //请求连接
+        dataType: 'json',   //返回json数据
+        data    : $("#recommend").serialize(),  //请求数据
+        success : function(data){
+            layer.close(loadA);
+            if(data.status == 1){
+                /* $(".close-reveal-modal").click();
+                $("#tip_msg").html('恭喜您，推荐成功！<br/>请您的朋友保持手机畅通，我们会尽快与他/她联系~');//.text('恭喜您，推荐成功！');
+                $("#bmcg-btn").click(); */
+                $("#recommend")[0].reset();
+                var nums = parseInt($('#tuijian_nums1').text()) + 1;
+
+                $('#tuijian_nums1').text(nums);
+                layer.alert('恭喜您，推荐成功！<br/>请您的朋友保持手机畅通，我们会尽快与他/她联系~', {title:'温馨提示'}, function(index){
+                    layer.closeAll();
+                });
+            }else{
+                layer.alert(data.msg, {title:'温馨提示'}, function(index){
+                    if(data.ret_url){
+                        location.href = data.ret_url;
+                        layer.closeAll();
+                    }else{
+                        layer.close(index);
+                    }
+                });
+            }
+            return false;
+        }
+    });
+}
+$(".region").change(function(){
+    var ob = $(this);
+    var pid = ob.find("option:selected").val();//attr('data-id');
+    var html = '<option value="" data-id="">请选择</option>';
+    var nextSelect = ob.next('select');
+    nextSelect.children().remove();
+    nextSelect.next('select').html(html);
+    for(var i=0; i<region.length; i++){
+        if(region[i]['pid'] == pid){
+            html += '<option value="'+region[i]['id']+'" data-id="'+region[i]['name']+'">'+region[i]['name']+'</option>'
+        }
+    }
+    nextSelect.html(html);
+    $('#baoming_select_store,#baoming_select_company').css('display','none');
+    if(pid == 410581) {
+        $.post("/Public/selectStoreByArea.html", {'area_id':pid}, function(data) {
+            html_str = '<option value="" data-id="">请选择</option>';
+            for(var i in data) {
+                html_str += '<option value="'+data[i]['id']+'" data-id="'+data[i]['name']+'">'+data[i]['name']+'</option>';
+            }
+            $('#baoming_select_store,#baoming_select_company').css('display','inline-block').html(html_str);
+        },'json')
+    }
+});
+
+//报名验证码发送
+var flag = true;
+var getCode = function(event){
+    if(flag == false){
+        return false;
+    }
+    var mobile = $("#inputMobile").val();
+    if(!mobile){
+        layer.tips('请输入手机号', '#inputMobile', {tips:[2, '#FF5722']});
+        return false;
+    }
+    var verify = $("#inputVerify").val();
+    if(!verify){
+        layer.tips('请输入图片验证码', '#inputVerify', {tips:[2, '#FF5722']});
+        return false;
+    }
+
+    //检测验证码
+    var loadA = layer.load(2);  //弹出加载框
+    $.post("/Public/checkCode.html", {verify:verify, flag:'signupSms_'}, function(rs){
+        if(rs.status != 1){
+            layer.close(loadA);
+            layer.tips(rs.msg, '#inputVerify', {tips:[2, '#FF5722']});
+            return false;
+        }
+
+        $.post("/Sms/signSms.html", {mobile:$("#inputMobile").val()},function(data){
+            layer.close(loadA);
+            if(data.status == 1){
+                flag = false;
+                unclick($('#reg_getCode'), 120);
+            }else{
+                layer.alert(data.msg, {title:'温馨提示'});
+            }
+        }, 'json')
+    }, 'json');
+}
+
+function unclick(obj,time){
+    var myclock = setInterval(function(){
+            if(time > 0){
+                $(obj).html('重新发送(' + time + ')');
+                time--;
+            }else{
+                $(obj).html('发送验证码');
+                flag = true;
+                clearInterval(myclock);
+            }
+        },1000
+    );
+    $(obj).html()
+}
+</script>
+
+
+<div style="display:none;">
+<!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260641456'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260641456' type='text/javascript'%3E%3C/script%3E"));</script> -->
+<!-- <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?96e5258014ddd09b4d30b8d15241fbe0";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script> -->
+
+<!-- <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> -->
+
+<!-- <script>
+(function(){
+   var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?131adf8e6e938f488d629d1ccb1d0513":"https://jspassport.ssl.qhimg.com/11.0.1.js?131adf8e6e938f488d629d1ccb1d0513";
+   document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script> -->
+</div>
+
+<!-- 左下-悬浮-广告 -->
+<!-- <script>var LB_AD_DATA_URL = "/Public/getGlfAd.html";</script> -->
+    <!-- 工立方-左下-悬浮c.k -->
+<style>
+.fixed_act_link {
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
+    z-index: 1000
+}
+
+.zhongqiu_link {
+    width: 170px;
+    /* height: 330px; */
+    display: block
+}
+</style>
+<div id="div_active_lb_ad">
+    <a id="active_lb_hd_href" href="" target="_blank" data-val="http://www.gonglf.com" class="fixed_act_link zhongqiu_link">
+    <img id="active_lb_hd_img_src" src="" alt="" data-val="http://img.gonglf.com/">
+    </a>
+    <script type="text/javascript" src="/static/info/js/glf_ad.js"></script>
+</div>
+</body>
+</html>

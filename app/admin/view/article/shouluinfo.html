@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+         <li><a href="{:url('admin/article/index')}" class="a_menu">文章管理<span class="layui-badge">{$numbers.guanli}</span></a></li>
+        <li><a href="{:url('admin/article/publish')}" class="a_menu">文章录入</a></li>
+        <li><a href="{:url('admin/article/design')}" class="a_menu">文章设计</a></li>
+        <li><a href="{:url('admin/article/generate')}" class="a_menu">文章生成</a></li>
+        <li><a href="{:url('admin/publish/index')}" class="a_menu">文章发布<span class="layui-badge layui-bg-green">{$numbers.fabu}</span></a></li>
+        <li class="layui-this">文章收录管理<span class="layui-badge layui-bg-blue">{$numbers.shoulu}</a></span></li>
+      </ul>
+    </div> 
+      <form class="layui-form serch" action="{:url('admin/article/shouluinfo')}" method="post">
+        <div class="layui-form-item" style="float: left;">
+          <div class="layui-input-inline">
+            <input type="text" name="keywords" lay-verify="title" autocomplete="off" placeholder="请输入关键词" class="layui-input layui-btn-sm">
+          </div>
+          <div class="layui-input-inline">
+            <div class="layui-inline">
+                <select name="article_cate_id" lay-search="">
+                  <option value="">分类</option>
+                  {volist name="$info.cate" id="vo"}
+                  <option value="{$vo.id}">{$vo.name}</option>
+                  {/volist}
+                </select>
+            </div>
+          </div>      
+          <div class="layui-input-inline">
+            <div class="layui-inline">
+                <select name="admin_id" lay-search="">
+                  <option value="">创建人</option>
+                  {volist name="$info.admin" id="vo"}
+                  <option value="{$vo.id}">{$vo.nickname}</option>
+                  {/volist}
+                </select>
+            </div>
+          </div>
+          <div class="layui-input-inline">
+            <div class="layui-inline">
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="create_time" placeholder="创建时间" name="create_time">
+              </div>
+            </div>
+          </div>
+          <button class="layui-btn layui-btn-danger layui-btn-sm" lay-submit="" lay-filter="serch">立即提交</button>
+        </div>
+      </form> 
+<button class="layui-btn layui-btn-sm layui-btn-normal" title="下载收录数据"style="margin-left: 15px" id="downloads">
+  <i class="layui-icon">&#xe601;</i>
+</button>
+    <table class="layui-table" lay-size="sm">
+      <colgroup>
+        <col width="50">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>标题</th>
+          <th>创建人</th>
+          <th>创建时间</th>
+          <th>任务时间</th>
+          <th>手机网址</th>
+          <th>电脑网址</th>
+          <th>手机收录</th>
+          <th>电脑收录</th>
+        </tr> 
+      </thead>
+      <tbody>
+        {volist name="articles" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td>{$vo.title}</td>
+          <td>{$vo.admin.nickname}</td>
+          <td>{$vo.create_time}</td>
+          <td>{$vo.timetask}</td>
+          <td>
+            <a href="http://{$vo.urlm}" target="_blank">{$vo.urlm}</a>
+          </td>
+          <td>
+            <a href="http://{$vo.urlpc}" target="_blank">{$vo.urlpc}</a>
+          </td>
+           <td>
+          {if condition="($vo.shoulum== 1)"}
+            <button class="layui-btn layui-btn-xs " value="{$vo.id}">
+              <i class="layui-icon">&#xe6c6;</i>是
+            </button>
+              {else/}
+              <button class="layui-btn layui-btn-xs layui-btn-primary" value="{$vo.id}">
+              <i class="layui-icon">&#xe6c5;</i>否
+              </button>
+              {/if}
+            
+          </td>
+          <td>
+           {if condition="($vo.shoulu== 1)"}
+            <button class="layui-btn layui-btn-xs " value="{$vo.id}">
+              <i class="layui-icon">&#xe6c6;</i>是
+            </button>
+              {else/}
+              <button class="layui-btn layui-btn-xs layui-btn-primary" value="{$vo.id}">
+              <i class="layui-icon">&#xe6c5;</i>否
+              </button>
+              {/if}
+          </td>
+        </tr>
+        {/volist}
+      </tbody>
+    </table>
+    <div style="padding:0 20px;">{$articles->render()}</div> 
+    {include file="public/foot"}
+  </div>
+  
+    <script type="text/javascript">
+      
+     //实例化layui弹窗
+layui.use('layer', function(){
+  var layer = layui.layer;
+  var form = layui.form;
+     //发布弹窗
+
+     $('#downloads').click(function (){
+       //rows=$(this).attr('value');
+       $.post('{:url('admin/rwexcel/index')}', function(str){
+        //var last=JSON.stringify(str);//将JSON对象转化为JSON字符
+        //var id=str['content'];
+     layer.open({
+      type: 1,
+      area: ['500px', '350px'],
+      content:str,
+    });
+   });
+    });
+});              
+    </script>
+</body>
+</html>

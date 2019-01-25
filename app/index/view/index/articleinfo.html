@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$articleinfo.title}</title>
+<meta name="keywords" content="{$articleinfo.tag}" />
+<meta name="description" content="{$articleinfo.description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" href="__STATIC__/article/css/style-main.css">
+<link rel="stylesheet" href="__STATIC__/article/css/style-news.css">
+<script src="__STATIC__/article/js/jquery.js"></script>
+<script src="__STATIC__/index/js/layer.js"></script>
+<script src="__STATIC__/index/js/main.js"></script>
+<style type="text/css">
+	.text_hide{width: 120px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.aa span{
+     margin-left: 15px;
+     cursor: pointer;
+     
+}
+.hidd_a{
+	display:none;
+}
+</style>
+</head>
+
+<body>
+{include file="common/header"}
+<div class="breadcrumb">
+	<ul class="section">
+		<li>您现在的位置：</li>
+		<li><a href="/">首页</a> <span class="divider">&gt;</span></li>
+						<li><a href="{:url('index/News/news')}">资讯</a> <span class="divider">&gt;</span></li>				<li><a href="/News/25.html">打工攻略</a> <span class="divider">&gt;</span></li><li class="active">资讯详情</li>
+				</ul>
+</div>
+
+
+<div class="wrap wrap_news">
+	<div class="section clearfix">
+		<div class="ne_fl">
+			<div class="ne_pg_main">
+				<div class="ne_pg">
+					<div class="ne_pg_title">
+						<h2>{$articleinfo.title}</h2>
+						<p><span>浏览次数：<?php 
+                    session_start();
+                    isset($_SESSION['num']) || $_SESSION['num'] =500;
+                    echo $_SESSION['num']++;
+                    ?>次</span><span>发布时间：{$articleinfo.create_time}</span><span>编辑：{$admin}</span></p>
+					</div>
+					<div class="ne_pg_con">
+                        {$articleinfo.content}
+						</div>
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_mshare" data-cmd="mshare" title="分享到一键分享">一键分享</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友">QQ好友</a></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"{$articleinfo.title}","bdMini":"2","bdMiniList":false,"bdPic":"图片","bdStyle":"1","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["mshare","qzone","tsina","tqq","renren","weixin","sqq"],"viewText":"分享到：","viewSize":"24"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["mshare","qzone","tsina","tqq","renren","weixin","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+					
+					<script type="text/javascript" charset="utf-8" src="js/buttonlite.js"></script><script type="text/javascript" charset="utf-8" src="js/bsharec0.js"></script>
+				</div>
+			</div>
+
+			<div class="ne_pg_recom ne_recom">
+				<div class="fac_title"><i class="line"></i><h3>相关文章推荐</h3></div>
+				<div class="ne_pg_recom_main">
+					<ul class="neix_txt">
+						{volist name="$bottom" id="vo"}
+						<li><a href="{:url('index/index/articleinfo',['id'=>$vo.id])}"><span class="times">{$vo.create_time}</span><i class="ic_dot"></i>{$vo.title}</a></li>
+                        {/volist}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="ne_fr">
+			<div class="ne_rhot ne_rmain">
+				<div class="ner_title"><i class="ic_line ic_ner_t"></i><h3>热门文章</h3></div>
+				<ul class="ne_rhot_list clearfix">
+					{volist name="$right_top" id="vo"}
+					     <li>
+							<a title="{$vo.title}" href="{:url('index/index/articleinfo',['id'=>$vo.id])}">
+								<img src="{$vo.thumb|geturl}" alt="{$vo.title}">
+								<p class="text_hide">{$vo.title}</p>
+							</a>
+						</li>
+				    {/volist}
+				</ul>
+			</div>
+			<div class="ne_rzt ne_rmain">
+				<div class="ner_title"><i class="ic_line ic_ner_t"></i><h3>热门专题</h3></div>
+				<ul class="ne_rzt_list neix_txt">
+					<li class="first"><a href="{:url('index/index/articleinfo',['id'=>$right_bottom.id])}" class="imgs text_hide"><img src="{$right_bottom.thumb|geturl}" alt="{$right_bottom.title}"></a><a href="{$right_bottom.title}"><i class="ic_dot"></i>{$right_bottom.title}</a></li>
+					{volist name="$right_last" id="vo"}
+		            <li><a href="{:url('index/index/articleinfo',['id'=>$vo.id])}" class="text_hide"><i class="ic_dot"></i>{$vo.title}</a></li>									
+		            {/volist}	
+		        </ul>
+			</div>
+		</div>
+	</div>
+    <div class="fac_recom section">
+	<div class="fac_title"><i class="line"></i><h3>大家都想去</h3></div>
+	<ul class="fac_recom_list">
+		{volist name="$last" id="vo"}
+        <li>
+                <a href="{:url('index/index/infos',['id'=>$vo.id])}" class="imgs" target="_blank"><img src="{$vo.thumb|geturl}" alt="昆山淳华"></a>
+                <div class="con">
+                    <a href="{$vo.thumb|geturl}" target="_blank" class="name">{$vo.name}</a>
+                    <p class="des">
+                        {$vo.sex}
+                    </p>
+                    <p class="price">￥{$vo.wagas}</p>
+                </div>
+            </li>
+        {/volist}
+    </ul>
+</div><!-- 大家都想去 -->
+</div>
+<script type="text/javascript" src="/static/public/js/footer.js"></script>
+<script type="text/javascript">
+	$('.nav li a').eq(0).removeClass("cur");
+$('.nav li a').eq(2).addClass("cur");
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>普工打工哪里好_电子厂打工感受_工厂打工怎么样 - 工立方打工网</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+
+<link rel="stylesheet" href="/static/news/css/style-main.css">
+
+<link rel="stylesheet" href="/static/news/css/style-news.css">
+
+<script src="/static/news/js/jquery.js"></script>
+<style type="text/css">
+.text_hide{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.aa span{
+     margin-left: 15px;
+     cursor: pointer;
+     
+}
+.hidd_a{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+{include file="common/header"}
+	
+<div class="wrap ne_nav">
+	<div class="section clearfix">
+		<dl>
+			<dt><i class="ic ic_n_type1"></i><a href="/News/" class="active">资讯</a></dt>
+			<dd><a href="/News/25.html" >打工攻略</a></dd><dd><a href="/News/12.html" >身在职场</a></dd><dd><a href="/News/7.html" >生活百态</a></dd><dd><a href="/News/6.html" >新闻动态</a></dd>		</dl>
+	</div>
+</div>
+
+<div class="wrap">
+	<div class="section clearfix ne_i_top">
+		<div class="ne_i_swiper">
+			<div class=" swiper-container" id="ne_i_swiper">
+				<div class="swiper-wrapper">
+					{volist name="$banner" id="vo" offset="0" length="4"}
+					<div class="swiper-slide"><a href="{:url('index/index/articleinfo',['id'=>$vo.id])}" target="_blank">
+							<img src="{$vo.thumb|geturl}">
+							<p>{$vo.title}</p></a>
+						</div>
+                      {/volist}
+
+						</div>
+					
+				<div class="pagination ne_pagination"></div>
+			</div>
+			<a class="arrow_ctr ic ic_n_swpl" href="#"></a>
+			<a class="arrow_ctr ic ic_n_swpr" href="#"></a>
+		</div>
+		<ul class="ne_i_hot">
+			{volist name="$info['right']" id="vo" offset="0" length="3"}
+			<li>
+					<h3><a href="{:url('index/index/articleinfo',['id'=>$vo.id])}" target="_blank">{$vo.title} </a></h3>
+					<p style="width: 414px;height: 57.6px;overflow: hidden;" >​{$vo.description}</p>
+				</li>
+			{/volist}
+		</ul>
+		
+
+	</div>
+	<div class="section ne_i_stp">
+		<div class="ne_i_tit">
+			<h2>资讯</h2>
+			
+		</div>
+		<div class="ne_i_xmain clearfix">
+			<ul class="neix_l neix_img">
+				{volist name="$info['left']" id="vo"}
+				<li class="first">
+							<a href="{:url('index/index/articleinfo',['id'=>$vo.id])}">
+								<img width="340" src="{$vo.thumb|geturl}" alt="{$vo.title}">
+								<p>{$vo.title}</p>
+							</a>
+						</li>
+				{/volist}
+		    </ul>
+			<div class="neix_c">
+				<ul class="neix_txt first">
+					{volist name="$banner" id="vo" offset="4" length="1"}
+					<li class="tops">
+								<a href="{:url('index/index/articleinfo',['id'=>$vo.id])}">{$vo.title}</a>
+							</li>
+					{/volist}
+                  
+                  {volist name="$banner" id="vo" offset="5" length="5"}
+					 <li>
+								<a href="{:url('index/index/articleinfo',['id'=>$vo.id])}"><i class="ic_dot"></i>{$vo.title}</a>
+                 
+					</li>							
+					{/volist}
+						</ul>
+					
+					
+				<ul class="neix_txt first">
+					{volist name="$banner" id="vo" offset="10" length="1"}
+					<li class="tops">
+								<a href="{:url('index/index/articleinfo',['id'=>$vo.id])}">{$vo.title}</a>
+							</li>
+					{/volist} {volist name="$banner" id="vo" offset="11" length="5"}
+					 <li>
+								<a href="{:url('index/index/articleinfo',['id'=>$vo.id])}"><i class="ic_dot"></i>{$vo.title}</a>
+                 
+					</li>							
+					{/volist}</ul>
+
+			</div>
+			<div class="neix_r">
+				<h3><em>新闻动态</em><i class="t_line"></i></h3>
+				<ul class="neix_img clearfix">
+					{volist name="$info['right']" id="vo" offset="3" length="2"}
+					<li>
+							<a href="{:url('index/index/articleinfo',['id'=>$vo.id])}">
+								<img src="{$vo.thumb|geturl}" alt="{$vo.title}" width="165px" height="124px">
+								<p>{$vo.title}</p>
+							</a>
+						</li>
+						{/volist}
+					</ul>
+				<h3><em>生活百态</em><i class="t_line"></i></h3>
+				<ul class="neix_txt">
+					{volist name="$info['bottom']" id="vo"}
+					<li>
+							<a href="{$vo.thumb|geturl}"><i class="ic_dot"></i>{$vo.title}</a>
+					</li>
+                    {/volist}
+				</ul>
+					
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/static/public/js/footer.js"></script>
+	<script src="/static/news/js/layer.js" merge="true"></script>
+	<script src="/static/news/js/main.js"></script>
+	<script
+		src="/static/news/js/tvp.player_v2_jq.js"></script>
+		<script src="/static/news/js/swiper.js"></script>
+	<script src="/static/news/js/news.js"></script>
+	
+<script type="text/javascript">
+$('.nav li a').eq(0).removeClass("cur");
+$('.nav li a').eq(2).addClass("cur");
+</script>
+
+</body>
+</html>

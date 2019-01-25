@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">上传设计</li>
+      </ul>
+    </div> 
+    
+  <div class="layui-form-item">
+    <label class="layui-form-label">名称</label>
+    <div class="layui-input-inline" style="width:30%">
+      <input type="text" name="model_name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+    </div>
+     <div class="layui-form-mid layui-word-aux">名称如：天空蓝风格、小明送的设计等</div>
+  </div>
+  <form class="layui-form">
+  <div class="layui-form-item">
+    <label class="layui-form-label">类型</label>
+    <div class="layui-input-inline" style="width:30%">
+      <select name="model_type" lay-verify="required" lay-search >
+        <option value="">请选择类型</option>
+        <option value="0">电脑模板</option>
+        <option value="1">手机模板</option>
+        <option value="2">电脑+手机模板</option>
+        <option value="3">电脑+MIP模板</option>
+        <option value="4">自适应模板</option>
+      </select>
+    </div>
+    </form>
+    <div class="layui-form-mid layui-word-aux">上传设计类型</div>
+  </div>
+  
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">选择设计包</label>
+    <div class="layui-input-inline checks" style="width:30%">
+     <button type="button" class="layui-btn" id="sgbao">
+  <i class="layui-icon">&#xe67c;</i>选择文件
+</button>
+<a class="file_info" style="display:inline-block;width: 180px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;color:#DC0606" title=""></a>
+    </div>
+
+    <div class="layui-form-mid layui-word-aux">1.必须为zip格式 2.不能大于30M</div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" id="model_start">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+    </div>
+  </div>
+
+
+    {include file="public/foot"}
+    <script type="text/javascript">
+
+    $('#model_start').click(function(){
+      var model_name = $("[name='model_name']").val();
+      var model_type = $("[name='model_type']").val();
+      var model_filename = $('.file_info').attr("title");
+      if (model_name!==''&&model_type!==''&& typeof model_filename!="undefined"&&model_filename!=='') {
+          $.ajax({
+          type:'post',
+          url:"{:url('admin/design/upload')}",
+          data:{model_name:model_name,model_type:model_type,model_filename:model_filename},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+
+      }
+      else{
+       layer.msg('有内容未填写或者没选择文件');
+      }//判断结束
+    })
+    </script>
+    <script type="text/javascript">
+
+    $('.is_top').click(function(){
+      var val = $(this).attr('data-val');
+      var id = $(this).attr('data-id');
+      var i = $(this).find('i');
+      var the = $(this);
+      if(val == 1){
+        var is_top = 0;
+      } else {
+        var is_top = 1;
+      }
+      $.ajax({
+        type:"post",
+        url:"{:url('admin/article/is_top')}",
+        data:{is_top:is_top,id:id},
+        success:function(res){
+          
+          if(res.code == 1) {
+            top();
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+      })
+
+      function top(){
+        if(val == 1){
+          i.attr("class","fa fa-toggle-off");
+          the.attr('data-val',0);
+        } else {
+          i.attr("class","fa fa-toggle-on");
+          the.attr('data-val',1);
+        }
+      }
+    })
+
+
+    $('.status').click(function(){
+      var val = $(this).attr('data-val');
+      var id = $(this).attr('data-id');
+      var i = $(this).find('i');
+      var the = $(this);
+      if(val == 1){
+        var status = 0;
+      } else {
+        var status = 1;
+      }
+      $.ajax({
+        type:"post",
+        url:"{:url('admin/article/status')}",
+        data:{status:status,id:id},
+        success:function(res){
+          
+          if(res.code == 1) {
+            tostatus();
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+      })
+
+      function tostatus(){
+        if(val == 1){
+          i.attr("class","fa fa-toggle-off");
+          the.attr('data-val',0);
+        } else {
+          i.attr("class","fa fa-toggle-on");
+          the.attr('data-val',1);
+        }
+      }
+    })
+
+layui.use('upload', function(){
+  var upload = layui.upload;
+   
+  //执行实例
+  var uploadInst = upload.render({
+    elem: '#sgbao' //绑定元素
+    ,url: "{:url('admin/design/uploads')}"
+    ,done: function(res){
+      //上传完毕回调
+      if(res['code']==1){
+        layer.msg(res.msg);
+         $('.file_info').html(res.data);
+         $('.file_info').attr("title",res.data);
+        
+      }else{
+         layer.msg(res.msg);
+         $('.file_info').html(res.data);
+      }
+     
+    }
+    ,error: function(index){
+      //请求异常回调
+    },accept: 'file' //允许上传的文件类型
+     ,size: 30000 //最大允许上传的文件大小
+      
+  });
+});
+    </script>
+  </div>
+</body>
+</html>

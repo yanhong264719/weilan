@@ -1,0 +1,270 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    
+    <title>{$recruits.name}</title>
+    <meta name="keywords" content="{$recruits.title}" />
+    <meta name="description" content="{$recruits.description}" />
+
+    <link href="/static/info/css/style-main.css" rel="stylesheet" />
+    <link href="/static/info/css/style-fac.css" rel="stylesheet" />
+    <!--[if lt IE 8]>
+        <script type="text/javascript">
+            var iealert_img_url = "/Public/Home/v/images";
+        </script>
+        <script src="/static/info/js/iealert.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            DomReady.ready(iealert);
+        </script>
+    <![endif]-->
+    <script src="/static/info/js/jquery.js"></script>
+    <script src="/static/info/js/layer.js" merge="true"></script>
+    <script src="/static/info/js/main.js"></script>
+    <script src="/static/info/js/fac.js"></script>
+    <script type="text/javascript">
+        var site_url = '';
+    </script>
+    <script src="/static/info/js/ckbrowser.js" type="text/javascript"></script><!-- 判断客户端并对文章进行跳转 -->
+    <style type="text/css">
+    .text_hide{width: 120px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.aa span{
+     margin-left: 15px;
+     cursor: pointer;
+     
+}
+.hidd_a{
+    display:none;
+}
+</style>
+</head>
+<body>
+{include file="common/header"}
+<div class="breadcrumb">
+    <ul class="section">
+        <li>您现在的位置：</li>
+        <li><a href="/">首页</a> <span class="divider">></span></li>
+        <li><a href="{:url('index/work/work')}">找工作</a> <span class="divider">></span></li>
+        <li class="active">{$recruits.name}</li>
+    </ul>
+</div>
+<div class="fac_wrap wrap">
+ <div class="section">
+        <div class="fac_top clearfix">
+            <div class="fac_imgshow " style="margin:0 auto">
+                <ul class="focus_pic" style="width: 450px;height:300px;overflow: hidden;">
+                    {volist name="pictures" id="vo"}
+                    <li class="first">
+                            <a href="javascript:(0);"><img src="{$vo}"><span class="fix_opt">共{$tot}张照片</span></a>
+                    </li>  
+                    {/volist}        
+                    </ul>
+                <div class="focus_nav">
+                    <ul>
+                        {volist name="pictures" id="vo"}
+                        <li><a><img src="{$vo}"><!-- <span class="fix_opt">&nbsp;</span> -->
+                            </a><b></b>
+                        </li>
+                        {/volist}                  
+                    </ul>
+                    <a href="javascript:;" title="上一个" class="navPrev ic ic_fac_arrowl"></a>
+                    <a href="javascript:;" title="下一个" class="navNext ic ic_fac_arrowr"></a>
+                </div>
+                <div class="focus_text">
+                    <ul>
+                        <li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li>                   </ul>
+                </div>
+            </div>
+            <div class="fac_top_info">
+                <div class="fac_top_acts">
+                    <a href="javascript:;" class="btn_share jiathis jiathis_txt" ><i class="ic ic_fac_share"></i><i class="ic ich ic_fac_share_hover"></i>分享</a>
+                 
+                  <a href="javascript:collect_func();" class="btn_collect " id="collect" data-id="204" title="点击收藏"><i class="ic ic_fac_collect"></i><i class="ic ich ic_fac_collect_hover"></i>收藏</a>
+
+                    <div class="bdsharebuttonbox" style="margin-left: 17px;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+
+                   
+                    <!-- JiaThis Button BEGIN -->
+                    <script type="text/javascript">
+                    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"{$recruits.title}","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                    </script>
+                    
+                    <!-- JiaThis Button END -->
+                </div>
+                <p class="names"><span class="tag_need">直招</span>{$recruits.title}</p>
+                <p class="des prices"><span class="titles">综合薪资：</span>{$recruits.wagas}</p>
+                <p class="fac_tag">
+                    {volist name="$tag" id="vo"}
+                     <em>{$vo}</em>
+                    {/volist}
+                   
+                </p>
+                <p class="des"><span class="titles">招聘人数：</span>{$people=$recruits.peoples}<span class="des_not"><i class="ic ic_fac_joined"></i>已有<em>
+                    <?php 
+                    session_start();
+                    $ab=rand(20,150);
+                    isset($_SESSION['num']) || $_SESSION['num'] =$ab;
+                    if($_SESSION['num']<$people){
+                    echo $_SESSION['num']++;
+                     }else{
+                      $_SESSION['num']=$people-100;
+                      echo $_SESSION['num']++;
+                     }
+                    ?>
+                        
+                    </em>报名</span><br>
+                <span class="titles">要　　求：</span>{$recruits.education}<i class="line">  
+                </i>{$recruits.sex}<i class="line"></i>{$recruits.age}<br><span class="titles">上班地址：</span>{$recruits.zparea}<a href="{:url('index/index/map',['id'=>$recruits.id])}" class="des_not"><i class="ic ic_fac_address" id="maps"></i>电子地图</a></p>
+                <div class="fac_top_phone">
+                    <span class="phones"><i class="ic ic_fac_numtitle"></i>{$recruits.tel}</span><a href='/Store/157' target="_blank" class="btn btn_b btn_round btn_orange">立刻报名</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="fac_main section clearfix">
+        <div class="s_l">
+            {$recruits.content}
+            <div class="fac_main_question">
+                <div class="fac_title"><span class="fr"><em class="nums">（共{$info.total}条）</em><a href="javascript:void(0);" onclick="message()" class="btn btn_s btn_orange">我要提问</a></span><i class="ic ic_fac_t3"></i><h3>岗位问答</h3><span class="notes">该企业相关问题由热心网友提供</span></div>
+                <ul class="fac_quelist">
+                    {volist name="$messages" id="vo"}
+                      <li class="fac_queitem">
+                            <i class="ic ic_fac_ques1"></i>
+                            <i class="ic ic_fac_ques2"></i>
+                            <i class="ic ic_fac_ques3"></i>
+                            <i class="ic ic_fac_ques4"></i>
+                            <div class="items item_ask">
+                                <span class="ic_type type1">问</span>
+                                <div class="con">
+                                    <p class="tit">{$vo.message}</p>
+                                    <p class="des">{$vo.create_time}匿名</p>
+                                </div>
+                            </div>
+                            <div class="items fac_que1">
+                            <span class="ic_type type2">答</span>
+                            <div class="con">
+                           {$vo.reply.reply}
+                            </div>
+                            </div>                     
+                             </li>
+            
+                    {/volist}
+                </ul>
+                <div style="padding:0px 20px;">{$page}</div>
+            </div>      </div>
+        <div class="s_r">
+            <div class="fac_info fac_rlist">
+                <div class="ner_title"><i class="ic_line ic_ner_t"></i><h3>企业详情</h3></div>
+                <div class="fac_info_con">
+                    <p class="name">{$recruits.name}</p>
+                    <div class="clearfix">
+                        <img src="{$recruits.thumb|geturl}" class="imgs" alt="{$recruits.name}封面图">
+                        <div class="con">
+                            <p><span class="titles">企业规模：</span>{$recruits.scales}</p>
+                            <p><span class="titles">所属行业：</span>{$recruits.trade}</p>
+                            <p><span class="titles">平均薪资：</span><span class="price">{$recruits.asale}</span></p>
+                        </div>
+                    </div>
+                    {$recruits.description}
+                </div>
+                <div class="fac_maps">
+                    <h4>工厂在哪？</h4>
+                    <div  style="height: 190px;">{include file="common/map"}</div>
+                    <div class="con" >
+                        <p ><span class="titles">企业位置：</span><span id="cons">{$recruits.province}{$recruits.city}{$recruits.area}{$recruits.zparea}</span></p>                       <p><span class="titles">乘车路线：</span>{$recruits.busline}</p>                        <p><span class="titles">接站地址：</span>{$recruits.address}
+</p>                  </div>
+                    <div class="fac_maps_join" style="margin:20px">
+                        <a href="http://plt.zoosnet.net/LR/Chatpre.aspx?id=PLT70504762&lng=cn" class="btn btn_s btn_blue btn_phone">在线报名</a>
+                    </div>
+                </div>
+            </div>
+            <div class="fac_hot fac_rlist">
+    <h3 class="titles">
+        <i class="ic ic_fac_hottitle"></i>
+    </h3>
+    <ul class="fac_hot_list">
+    {volist name="$right" id="vo"}
+    <li><a href="{:url('index/index/infos',['id'=>$vo.id])}" target="_blank">{$vo.name}  （{$vo.wagas}）</a></li>
+    {/volist}
+  </ul>
+</div>
+        </div>
+    </div>
+    <div class="fac_recom section">
+    <div class="fac_title"><i class="line"></i><h3>大家都想去</h3></div>
+    <ul class="fac_recom_list">
+        {volist name="$bottom" id="vo"}
+        <li>
+                <a href="{:url('index/index/infos',['id'=>$vo.id])}" class="imgs" target="_blank"><img src="{$vo.thumb|geturl}" alt="昆山淳华"></a>
+                <div class="con">
+                    <a href="{$vo.thumb|geturl}" target="_blank" class="name">{$vo.name}</a>
+                    <p class="des">
+                        {$vo.sex}
+                    </p>
+                    <p class="price">￥{$vo.wagas}</p>
+                </div>
+            </li>
+        {/volist}
+        </ul>
+</div>
+</div>
+<!-- 底部菜单 -->
+<script type="text/javascript" src="/static/public/js/footer.js"></script>
+
+<script src="/static/info/js/superslide.js"></script>
+<script type="text/javascript">
+function message(){
+layer.prompt({
+  formType: 2,
+  value: '请留下您的联系方式,我们会第一时间回复你！',
+  title: '请输入留言信息',
+  maxlength: 150,
+  btnAlign: 'c', //按钮居中
+}, 
+ function(value,index){
+ if (value){
+$.ajax({
+    type : 'post',
+    url  : '/index/index/mess',
+    data : {'message':value,'recruit_id':{$recruits.id}},
+    dataType:'json',
+    success : function(res){
+        if(res.code == 1){
+           layer.msg(res.msg,{icon: 6}); 
+        }
+        if(res.code == 0){
+         layer.msg(res.msg,{icon: 2});
+        }
+    }
+  });
+ }else{
+      layer.msg('不能为空',{icon: 6});
+ }
+  //layer.close(index);
+}
+)};
+$('.nav li a').eq(0).removeClass("cur");
+$('.nav li a').eq(1).addClass("cur");
+</script>
+<div style="display:none;">
+</div>
+<style>
+.fixed_act_link {
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
+    z-index: 1000
+}
+
+.zhongqiu_link {
+    width: 170px;
+    /* height: 330px; */
+    display: block
+}
+</style>
+</body>
+</html>

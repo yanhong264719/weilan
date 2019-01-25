@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{$keywords.name}</title>
+	<meta name="keywords" content="{$keywords.keywords}">
+	<meta name="description" content="{$keywords.desc}">
+	<meta name="author" content="">
+	<meta name="viewport" content=" initial-scale=1, maximum-scale=1">
+	<meta name="full-screen" content="true">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="/Public/Wap/img/logo.png">
+	<link rel="stylesheet" href="__STATIC__/infos/css/sm.css">
+	<link rel="stylesheet" href="__STATIC__/infos/css/sm-extend.min.css">
+	<link rel="canonical" href=""/>
+	<link rel="stylesheet" href="__STATIC__/infos/css/home.css">		<style>
+		.page_ilink a{color:#333;}
+	</style>
+</head>
+<body>
+    <div class="page page_h" id="page_home_company" >
+	<nav class="bar bar-tab h_bar">
+		<a href="{:url('/mobile/question/index',['id'=>$recruit.id])}" class="tab-item external h_bar_ask"><i class="icon icon2 icon2-wenda"></i>问答</a>
+		<a href="{:url('mobile/index/baoming',['id'=>$recruit.id])}" class="tab-item h_bar_join"><em><i class="icon icon2 icon2-woyaobaoming"></i>我要报名</em></a>
+		<a href="/" class="tab-item h_bar_recom"><em><i class="icon icon2 icon2-fabu"></i>返回首页</em></a>
+	</nav>
+	<div class="content">
+		<div id="cn_content" class="cn_content">
+			<div id="cn_top">
+				<div class="h_nav_tool">
+					<a href="javascript:history.go(-1)" class="pull-left icon icon-left external"></a>
+					<a href="javascript:void(0)" class="pull-right external icon icon2 icon2-share_light act_share"></a>
+					<a href="javascript:void(0)" id="collect" onclick="collect(this)" class="pull-right external ic_fav icon icon2 icon2-favor_light" data-ajax="/Company/collect?id=106" data-tag="0"></a>
+					<!-- icon2-favor_light -->
+				</div>
+				<div class="g_swiper swiper_home">
+					<!-- Slider -->
+					<div class="swiper-container" id="h_swiper">
+					    <div class="swiper-wrapper" id="h_swiper_list">
+					    	{volist name="$info['pictures']" id="vo"}
+					  		<div class="swiper-slide"><a href="" class="external"><img class="swiper-img" alt="" src="{$vo}" data-index="1" /></a>
+					  		</div>
+					  		{/volist}
+					   </div>
+					 <div class="swiper-pagination"></div>
+					</div>
+				</div>
+
+				<div class="page_hcon page_hdes">
+					<h2>{$recruit.name}</h2>
+					<p class="h_tags">
+						{volist name="$info['tag']" id="vo"}
+						<span class="h_tag">{$vo}</span>&nbsp;
+						{/volist}
+					</p>
+					<dl class="des_list row no-gutter">
+						<div><dt>综合薪资：</dt><span class="t_price"><em>{$recruit.wagas}</em></span></div>
+						<dt>招聘人数：</dt>
+						<dd>{$recruit.peoples}人<span class="join_num">（已有{$info['num']}人报名）</span></dd>
+						<dt>招聘要求：</dt>
+						<dd><em class="clm"></em><em class="clm">{$recruit.sex}</em></dd>
+					</dl>
+				</div>
+				<div class="page_hcon page_h_desaddress">
+					<p><a href="{:url('index/map',['id'=>$recruit.id])}" class="external to_maps" >查看位置</a><i class="icon2 icon2-location"></i>{$recruit.province}{$recruit.city}{$recruit.zparea}</p>
+				</div>
+
+			
+
+				<div class="page_hcon page_hstorerecom fixed-tab" data-offset="44">
+					<header class="bar bar-nav">
+						<a href="javascript:history.go(-1)" class="pull-left back"><span class="icon icon-left"></span></a>
+						<a href="javascript:void(0)" id="" class="pull-right external icon icon-fenxiang act_share"></a>
+						<a href="javascript:collect(this)" id="collect2" onclick="collect(this)" class="pull-right external icon icon-shoucang" data-ajax="/Company/collect?id=106" data-tag="0"></a>
+						<h1 class="title">{$recruit.name}</h1>
+					</header>
+					<div class="buttons-tab stp1" id="cn_tab">
+						<a href="#stp1" data-stps="1" class="tab-link external button"><span><i class="icon2 icon2-daohang"></i>薪资</span></a>
+						<a href="#stp2" data-stps="2" class="tab-link external button"><span><i class="icon2 icon2-daohang"></i>岗位</span></a>
+						<a href="#stp3" data-stps="3" class="tab-link external button"><span><i class="icon2 icon2-daohang"></i>企业</span></a>
+						<a href="#stp4" data-stps="4" class="tab-link external button"><span><i class="icon2 icon2-daohang"></i>推荐</span></a>
+					</div>
+					<ul class="rows page_hstorerecom_rows" id="store_list_circle"></ul>
+				</div>
+				
+
+				<div class="page_hcon page_hcompony list-block media-list">
+					<div class="item-content">
+						<div class="item-media"><img src="{$recruit.thumb|geturl}"  alt=""></div>
+						<div class="c_main item-inner">
+							<p class="c_names">{$recruit.name}</p>
+							<p class="c_recoms">推荐进厂指数<span class="c_stars">
+										<i class="icon2 icon2-zhishu"></i><i class="icon2 icon2-zhishu"></i><i class="icon2 icon2-zhishu"></i><i class="icon2 icon2-zhishu"></i><i class="icon2 icon2-zhishu"></i></span>
+								</p>						</div>
+						<div class="item-after"><a href="#stp3" data-stps="3" class="external button button-round to_info" id="btn_toinfo">企业详情</a></div>
+					</div>
+				</div>
+
+			</div>
+
+			{$recruit.mcontent}
+			<h2 class="f_title scroll_title" data-stp="3" id="stp3"><span class="ic_line ic_line_l"></span><i class="icon2 icon2-qiyexiangqing"></i>企业详情<span class="ic_line ic_line_r"></span></h2>
+
+			<div class="page_hcon page_hwords">
+				<div class="h_title">
+					<h2><i class="ic_line"></i>工厂简介</h2>
+				</div>
+				<div class="words_con">
+					<p>{$recruit.description}</p>
+				</div>
+			</div>
+
+			<div class="page_hcon page_hposition">
+				
+				
+				<div class="h_p_near">
+					<p class=""><span class="titles">企业地址：</span>{$recruit.province}{$recruit.city}{$recruit.zparea}</p>
+					<p class="" style="margin-bottom:20px"><span class="titles">乘车路线：</span>{$recruit.busline}</p>
+
+				</div>
+			</div>
+
+			<h2 class="f_title scroll_title" data-stp="4" id="stp4"><span class="ic_line ic_line_l"></span><i class="icon2 icon2-weinintuijian"></i>为您推荐<span class="ic_line ic_line_r"></span></h2>
+			<div class="page_hcon page_hrecom list-block media-list">
+				<div class="h_title">
+					<h2><i class="ic_line"></i>推荐企业</h2><a href="/Company/index.html" class="t_more external">更多企业</a>
+				</div>
+				<ul class="f_list">
+		
+			{volist name="$data" id="vo"}
+			<li>
+		<a href="{:url('mobile/index/infos',['id'=>$vo.id])}" class="external item-content" data-no-cache="true">
+			<div class="item-media">
+				<img src="{$vo.thumb|geturl}" class="avator" alt="{$vo.title}">
+				<img src="__STATIC__/infos/picture/tag_frecom.png" rel="nofollow" class="ic tag_frecom">			</div>
+			<div class="item-inner">
+				<div class="item-title" >{$vo.title} </div>
+				<div class="item-subtitle t_tag">{$vo.sex}</div>
+				<p class="h_tags">
+						<span class="h_tag">{$vo.tag[0]}</span>&nbsp;<span class="h_tag">{$vo.tag[1]}</span>&nbsp;<span class="h_tag">{$vo.tag[2]}</span>&nbsp;					</p>				<div class="item-title-row">
+	              <div class="item-subtitle t_price">{$vo.wagas}</div>
+	             
+	            </div>
+											</div>
+		</a>
+	</li>
+	{/volist}
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="share_modal" class="actions-modal share_modal">
+	<div class="actions-modal-group"><span class="actions-modal-label">请选择</span>
+	<div class="share_mlist row" id="share_mlist">
+		<a href="#" onclick="shareEvent(this);" class="external col-33 sm1"><span class="icon icon-pengyouquan"></span>朋友圈</a>
+		<a href="#" onclick="shareEvent(this);" class="external col-33 sm2"><span class="icon icon-sweixin"></span>微信</a>
+		<a href="#" onclick="shareEvent(this);" class="external col-33 sm3"><span class="icon icon-scqq"></span>QQ</a>
+		<a href="http://s.jiathis.com/?webid=qzone&url=http://m.gonglf.com/Company/106.html?is_share=1&title=昆山纬创热招普工&summary=玉山城南出口加工区第一大道168号&uid=1591338&data_track_clickback=true&pic=" target="_blank" data-id="undefined" class="external col-33 sm4"><span class="icon icon-sqzone"></span>QQ空间</a>
+		<a href="http://s.jiathis.com/?webid=tsina&url=http://m.gonglf.com/Company/106.html?is_share=1&title=昆山纬创热招普工会&summary=玉山城南出口加工区第一大道168号&uid=1591338&data_track_clickback=true&pic=&appkey=2658546502&ralateUid=5261629664" target="_blank" data-id="undefined" class="external col-33 sm5"><span class="icon icon-stsina"></span>新浪微博</a>
+	</div>
+
+	</div><div class="actions-modal-group"><span class="actions-modal-button bg-danger" id="share_close">取消</span></div>
+</div>
+<style type="text/css">
+	.share-weixin,.share-iphone,.share-android {
+		position: fixed;
+		display: none;
+	    width: 100%;
+	    height: 100%;
+	    left: 0;
+	    bottom: 0;
+	    text-align: center;
+	    background: rgba(0,0,0,.7);
+	    z-index: 9999;
+	}
+	.share-weixin .share_pic1 {
+		margin-top: 1rem;
+	}
+	.share-weixin .share-know {
+		width: 36%;
+		margin-top: 1.5rem;
+	}
+	.share-iphone .share-know {
+		/*margin-top:;*/
+	}
+	.share-iphone .share-know {
+		width: 36%;
+		margin-top: 1rem;
+	}
+	.share-android .share-know {
+		width: 36%;
+		margin-top: 15rem;
+	}
+	.share-android .share-pic2 {
+		width: 64%;
+		margin-top: 1rem;
+	}
+</style>
+<!-- 微信浏览器打开的时候分享 -->
+<div class="share-weixin" id="share-weixin">
+	<img class="share_pic1" width="100%" src="__STATIC__/infos/picture/share_pic1.png">
+	<img class="share-know" src="__STATIC__/infos/picture/share_know.png">
+</div>
+<!-- 苹果浏览器打开时的分享 -->
+<div class="share-iphone" id="share-iphone" style="overflow: scroll;">
+	<br>
+	<img width="100%" src="__STATIC__/infos/picture/share_a1.png">
+	<img width="100%" src="__STATIC__/infos/picture/share_a2.png">
+	<img width="100%" src="__STATIC__/infos/picture/share_a3.png">
+	<img width="100%" src="__STATIC__/infos/picture/share_a4.png">
+	<img class="share-know" src="__STATIC__/infos/picture/share_know.png">
+</div>
+<!-- 安卓浏览器打开时的分享 -->
+<div class="share-android" id="share-android">
+	<img class="share-know" src="__STATIC__/infos/picture/share_know.png">
+	<img class="share-pic2" src="__STATIC__/infos/picture/share_pic2.png">
+</div>
+
+<script type="text/javascript" src="__STATIC__/infos/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript">
+        wx.config({
+          debug: false,
+          appId: 'wxc171b0f334c12124',
+          timestamp: 1540360703,
+          nonceStr: 'pGvkRld2IAENagJx',
+          signature: 'ae6b4d65fab7730b4d636656b86e7eae6ef2c8e5',
+          jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'getLocation'
+          ]
+        });
+
+
+        var gps_data;
+        
+        wx.ready(function () {
+	          var shareData = {
+	          title: '昆山纬创热招普工',
+	          desc: '玉山城南出口加工区第一大道168号',
+	          link: 'http://m.gonglf.com/Company/106.html?is_share=1',
+	          imgUrl: 'http://img.gonglf.com/company/879a07c016ef4f83added496277cd716.jpg@!img_375_250_100_w'
+	        };
+	        wx.onMenuShareAppMessage(shareData);
+	        wx.onMenuShareTimeline(shareData);
+	        wx.onMenuShareQQ(shareData);
+	        wx.onMenuShareWeibo(shareData);
+	        wx.onMenuShareQZone(shareData);
+
+
+	        wx.getLocation({
+                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    // var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    // var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    // var speed = res.speed; // 速度，以米/每秒计
+                    // var accuracy = res.accuracy; // 位置精度
+                    gps_data = res;
+                }
+            });
+        // 在这里调用 API
+      });
+
+       var is_store_page = 1;
+       var filter_str = '';
+       var search_store_list_url = '/Store/index';
+
+       var crt_fac_id = '106';
+  </script>
+
+<script type="text/javascript">
+	var img_width =  document.body.clientWidth;
+	var img_height = parseInt(img_width)*0.67;
+	var img_objs = document.getElementsByClassName("swiper-img");
+	var i;
+	for (i = 0; i < img_objs.length; i++) {
+	    img_objs[i].style.width = img_width+"px";
+	    img_objs[i].style.height = img_height+"px";
+	}
+</script>
+	<script src="__STATIC__/infos/js/zepto.js"></script>
+	<script src="__STATIC__/infos/js/main.js"></script>
+	
+	<script src="__STATIC__/infos/js/sm.min.js"></script>
+	<script src="__STATIC__/infos/js/sm-extend.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/infos/js/list.js"></script>	
+
+</body>
+</html>

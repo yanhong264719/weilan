@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">文章标题上传</li>
+      </ul>
+    </div> 
+  <div class="layui-form-item">
+    <label class="layui-form-label">选择文件</label>
+    <div class="layui-input-inline checks" style="width:30%">
+     <button type="button" class="layui-btn" id="sgbao">
+  <i class="layui-icon">&#xe67c;</i>选择文件
+</button>
+<a class="file_info" style="display:inline-block;width: 200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"title=""></a>
+    </div>
+    <div class="layui-form-mid layui-word-aux">1.必须为xlsx、xls、csv格式 2.不能大于30M</div>
+  </div>
+  <blockquote class="layui-elem-quote">
+ 1.不知道excel文件的格式,请点击这里下载<a href="{:url('admin/rwexcel/example')}" style="color:#009688;font-size: 15px">Excel文件</a> <br/>
+ 2.请上传xlsx、xls、csv格式<br/>
+ 3.上传成功会返回上传成功的数量<br/>
+ 4.遇到上传成功,但是没数据返回,说明上传失败,请及时联系我<br/>
+  </blockquote>
+    {include file="public/foot"}
+    <script type="text/javascript">
+
+    $('#model_start').click(function(){
+      var model_name = $("[name='model_name']").val();
+      var model_filename = $('.file_info').attr("title");
+      if (model_name!==''&& typeof model_filename!="undefined"&&model_filename!=='') {
+          $.ajax({
+          type:'post',
+          url:"{:url('admin/rwexcel/daoru')}",
+          data:{model_name:model_name,model_filename:model_filename},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+
+      }
+      else{
+       layer.msg('有内容未填写或者没选择文件');
+      }//判断结束
+    })
+    </script>
+    <script type="text/javascript">
+layui.use('upload', function(){
+  var upload = layui.upload;
+   
+  //执行实例
+  var uploadInst = upload.render({
+    elem: '#sgbao' //绑定元素
+    ,url: "{:url('admin/rwexcel/excel')}"
+    ,done: function(res){
+      //上传完毕回调
+      if(res['code']==1){
+        layer.msg(res.msg);
+         $('.file_info').html(res.data);
+         $('.file_info').attr("title",res.data);
+         setTimeout(function(args) {
+         	 location.reload();
+         },3000);
+        
+      }else{
+         layer.msg(res.msg);
+         $('.file_info').html(res.data);
+      }
+     
+    }
+    ,error: function(index){
+      //请求异常回调
+    },accept: 'file' //允许上传的文件类型
+     ,size: 30000 //最大允许上传的文件大小
+      
+  });
+});
+    </script>
+  </div>
+</body>
+</html>

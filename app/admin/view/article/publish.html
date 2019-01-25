@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li><a href="{:url('admin/article/index')}" class="a_menu">资源管理<span class="layui-badge">{$numbers.guanli}</span></a></li>
+        <li class="layui-this">资源录入</li>
+      </ul>
+    </div> 
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+      
+      <div class="layui-form-item">
+        <label class="layui-form-label">学生姓名</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="student_name" lay-verify="title" autocomplete="off" placeholder="请输入学生姓名" class="layui-input" type="text" {notempty name="$article.student_name"}value="{$article.student_name}"{/notempty}>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">家长姓名</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="home_name" lay-verify="title" autocomplete="off" placeholder="请输入家长姓名" class="layui-input" type="text" {notempty name="$article.home_name"}value="{$article.home_name}"{/notempty}>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">学生电话</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="student_tel" lay-verify="title" autocomplete="off" placeholder="请输入学生电话" class="layui-input" type="text" {notempty name="$article.student_tel"}value="{$article.student_tel}"{/notempty} onkeyup="this.value=this.value.replace(/[^\d]/g,'')" maxlength="11">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">家长电话</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="home_tel" lay-verify="title" autocomplete="off" placeholder="请输入家长电话" class="layui-input" type="text" {notempty name="$article.home_tel"}value="{$article.home_tel}"{/notempty} onkeyup="this.value=this.value.replace(/[^\d]/g,'')" maxlength="11">
+        </div>
+      </div>
+       <div class="layui-form-item">
+        <label class="layui-form-label">学生qq</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="student_qq" lay-verify="title" autocomplete="off" placeholder="请输入学生qq" class="layui-input" type="text" {notempty name="$article.student_qq"}value="{$article.student_qq}"{/notempty}>
+        </div>
+      </div>
+       <div class="layui-form-item">
+        <label class="layui-form-label">学生微信</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="student_weixin" lay-verify="title" autocomplete="off" placeholder="请输入学生微信" class="layui-input" type="text" {notempty name="$article.student_weixin"}value="{$article.student_weixin}"{/notempty}>
+        </div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">其他</label>
+        <div class="layui-input-block" style="max-width:600px;">
+          <input name="qt" autocomplete="off" placeholder="其他描述信息" class="layui-input" type="text" {notempty name="$article.qt"}value="{$article.qt}"{/notempty}>
+        </div>
+      </div>    
+      <div class="layui-form-item">
+        <label class="layui-form-label">选择地区</label>
+            <div class="layui-input-inline">
+        <select id="province" name="province" lay-filter="province" class="province">
+          <option {notempty name="$article.province"}{eq name="$article.province" value="$article.province"}{/eq}{/notempty}>{notempty name="$article.province"}{$article.province}{/notempty}</option>
+        </select>
+      </div>
+      <div class="layui-input-inline">
+        <select id="city" name="city" lay-filter="city" disabled>
+          <option {notempty name="$article.city"}{eq name="$article.city" value="$article.city"}{/eq}{/notempty}>{notempty name="$article.city"}{$article.city}{/notempty}</option>
+        </select>
+      </div>
+      <div class="layui-input-inline">
+        <select id="area" name="area" lay-filter="area" disabled>
+          <option {notempty name="$article.area"}{eq name="$article.area" value="$article.area"} {/eq}{/notempty}>{notempty name="$article.area"}{$article.area}{/notempty}</option>
+        </select>
+      </div>
+    </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">专业/学历</label>
+            <div class="layui-input-inline">
+        <select class="form-control m-b" id="p" lay-filter="area3">
+           <option {notempty name="$catedata.yi"}{eq name="$catedata.yi" value="$catedata.yi"} {/eq}{/notempty}>{notempty name="$catedata.yi"}{$catedata.yi}{/notempty}</option>
+                {foreach name="province" item="vo"}
+                <option value="{$vo.id}" data-id="{$vo.id}">{$vo.name}</option>
+                {/foreach}
+            </select>
+      </div>
+      <div class="layui-input-inline">
+        <select class="form-control m-b" id="c"  disabled lay-filter="area2">
+                <option {notempty name="$catedata.er"}{eq name="$catedata.er" value="$catedata.er"} {/eq}{/notempty}>{notempty name="$catedata.er"}{$catedata.er}{/notempty}</option>
+            </select>
+      </div>
+      <div class="layui-input-inline">
+        <select class="form-control m-b" id="a" name="article_cate_id" lay-filter="area1">
+            <option {notempty name="$catedata.san" value="$catedata.id" }name="{$catedata.san}" value="{$catedata.id}"{/notempty}>{notempty name="$catedata.san"}{$catedata.san}{/notempty}</option>
+            </select>
+      </div>
+      <div class="layui-form-mid layui-word-aux" >请填写完整</div>
+    </div>
+  
+      {notempty name="$article"}
+      <input type="hidden" name="id" value="{$article.id}">
+      {/notempty}
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+  
+  
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+             let ab_p=$('#province option:selected').text();
+             $('#province option:selected').val(ab_p);
+             let ab_c=$('#city option:selected').text();
+             $('#city option:selected').val(ab_c);
+             let ab_a=$('#area option:selected').text();
+             $('#area option:selected').val(ab_a);
+                  $.ajax({
+                      url:"{:url('admin/article/publish')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg,{icon: 5});
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+  </div>
+    <!-- 三级联动js -->
+<script type="text/javascript" src="/static/public/area/address.js"></script>
+<script type="text/javascript">
+    layui.config({
+      base : "__PUBLIC__/area/" //address.js的路径
+    }).use(["address"], function() {
+      var address = layui.address();
+ 
+    });
+  </script>
+
+  <script>
+     layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+               $("#p option[value='0']").prop('disabled',true);
+              var area_url = "{:url('admin/article/area')}";
+form.on('select(area3)', function(data){
+ var pid = $(data.elem).find("option:selected").attr('data-id');
+          //已经选择了省份，又不选择省份，改变属性
+           
+          if( '0' == pid){
+              $("#pname").val('er级分类');
+              $("#c").html('<option value="0" data-id="0">二级分类</option>').attr('disabled', true);
+              $("#a").html('<option value="0" data-id="0">三级分类</option>').attr('disabled', true);
+          }
+          if('0' == pid){
+             return ;
+          };
+          $.post(area_url, {'code' : pid}, function(res){
+          
+              if(1 == res.code){
+                  var _html = '<option value="0" data-id="0">二级分类</option>';
+                  $.each(res.data, function(k, v){
+                      _html += '<option value="' + v.id + '" data-id="' + v.id + '">' + v.name + '</option>';
+                  });
+                  
+                  $('#c').html(_html);
+                   layui.form.render();
+              }
+          }, 'json');
+          $("#c").removeAttr('disabled'); //去除不可选状态
+          $("#a").html('<option value="0" data-id="0">三级分类</option>').attr('disabled', true);
+});  
+form.on('select(area2)', function(data){
+ var cid = $(data.elem).find("option:selected").attr('data-id');
+          //已经选择了城市，又不选择城市，改变属性
+
+          if( '0' == cid){
+              $("#cname").val('');
+              $("#a").html('<option value="0" data-id="0">三级分类</option>').attr('disabled', true);
+          }
+          if( '0' == cid ){
+             return ;
+          };
+          $.post(area_url, {'code' : cid}, function(res){
+              if(1 == res.code){
+                  var _html = '<option value="0" data-id="0">三级分类</option>';
+                  $.each(res.data, function(k, v){
+                      _html += '<option value="' + v.id + '" data-id="' + v.id + '">' + v.name + '</option>';
+                  });
+                  $('#a').html(_html);
+                  layui.form.render();
+              };
+          }, 'json');
+    $("#a").removeAttr('disabled'); //去除不可选状态
+}); 
+form.on('select(area1)', function(data){
+var aid = $(data.elem).find("option:selected").attr('data-id');
+          if('0' == aid){
+              $("#aname").val('');
+          } 
+          }); 
+  });
+</script>
+</body>
+</html>
